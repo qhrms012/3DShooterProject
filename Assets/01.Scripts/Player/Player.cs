@@ -8,20 +8,21 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float playerSpeed;
     private StateMachine stateMachine;
-    private Animator animator;
+
+    private Animator childAnimator;
     private Rigidbody rb;
     public Vector3 position;
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        childAnimator = transform.Find("Animator").GetComponent<Animator>(); // 자식의 Animator 찾기
         rb = GetComponent<Rigidbody>();
         stateMachine = new StateMachine();
 
     }
     private void Start()
     {
-        stateMachine.SetState(new IdleState(stateMachine, animator));
+        stateMachine.SetState(new IdleState(stateMachine, childAnimator));
     }
 
     public void OnMove(InputValue value)
