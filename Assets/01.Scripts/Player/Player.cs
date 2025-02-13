@@ -34,37 +34,41 @@ public class Player : MonoBehaviour
         playerSpeed = walkSpeed;
         stateMachine.SetState(new IdleState(stateMachine, childAnimator,this));
     }
-
+    private void Update()
+    {
+        OnTurn();
+        stateMachine.Update(position);
+        UpdateMovementState();
+    }
     public void OnMove(InputValue value)
     {
         Vector2 inputVector = value.Get<Vector2>();
         position = new Vector3(inputVector.x, 0, inputVector.y);
     }
-    public void OnAttack()
+    private void UpdateMovementState()
     {
-        Debug.Log("attack");
-    }
-    private void Update()
-    {
-        stateMachine.Update(position);
-        transform.LookAt(transform.position + position);
-
-        if (Input.GetKey(KeyCode.LeftShift)) 
+        if (Input.GetKey(KeyCode.LeftShift))
         {
             OnRun();
         }
-        else if(position.magnitude != 0)
+        else if (position.magnitude != 0)
         {
             onRun = false;
-            stateMachine.SetState(new WalkState(stateMachine,childAnimator,this));
+            stateMachine.SetState(new WalkState(stateMachine, childAnimator, this));
         }
-        
-
+    }
+    private void OnTurn()
+    {
+        transform.LookAt(transform.position + position);
     }
     public void OnRun()
     {
         onRun = true;
         stateMachine.SetState(new RunState(stateMachine, childAnimator,this));
+    }
+    public void OnAttack()
+    {
+        Debug.Log("attack");
     }
     private void FixedUpdate()
     {
