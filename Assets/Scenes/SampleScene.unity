@@ -307,7 +307,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d9a6a5665feb14c9f16511e1e924a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 2
+  walkSpeed: 0
+  runSpeed: 0
   position: {x: 0, y: 0, z: 0}
 --- !u!95 &670667004
 Animator:
@@ -1044,7 +1045,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d9a6a5665feb14c9f16511e1e924a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 10
+  walkSpeed: 5
+  runSpeed: 10
   position: {x: 0, y: 0, z: 0}
 --- !u!136 &1679981090
 CapsuleCollider:
@@ -1324,7 +1326,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d9a6a5665feb14c9f16511e1e924a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 2
+  walkSpeed: 0
+  runSpeed: 0
   position: {x: 0, y: 0, z: 0}
 --- !u!54 &1774137241
 Rigidbody:
