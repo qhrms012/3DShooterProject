@@ -17,6 +17,7 @@ public class JumpState : Istate
     }
     public void Enter()
     {
+
         animator.Play("Jump");
         if (!player.onJump)
         {
@@ -27,15 +28,12 @@ public class JumpState : Istate
 
     public void Execute(Vector3 playerVector)
     {
-        if (player.IsGrounded()) // ∂•ø° ¥Í¿∏∏È IdleState∑Œ ∫Ø∞Ê
-        {
-            stateMachine.SetState(new IdleState(stateMachine, animator, player));
-        }
+
     }
 
     public void Exit()
     {
-        player.onJump = false;
+        
     }
 
 }

@@ -85,10 +85,16 @@ public class Player : MonoBehaviour
 
     }
 
-    public bool IsGrounded()
+    private void OnCollisionEnter(Collision collision)
     {
-        return Physics.Raycast(transform.position, Vector3.down, 1.1f, LayerMask.GetMask("Floor"));
+        if (collision.gameObject.CompareTag("Floor"))
+        {
+            onJump = false; // 착지 시 점프 가능하도록 설정
+            stateMachine.SetState(new LandState(stateMachine, childAnimator, this));
+        }
     }
+
+
     public void SetSpeed(float speed)
     {
         playerSpeed = speed;

@@ -827,6 +827,7 @@ MonoBehaviour:
   walkSpeed: 5
   runSpeed: 10
   jumpPower: 15
+  onJump: 0
   position: {x: 0, y: 0, z: 0}
 --- !u!136 &1679981090
 CapsuleCollider:
