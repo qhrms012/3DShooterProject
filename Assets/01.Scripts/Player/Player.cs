@@ -10,13 +10,17 @@ public class Player : MonoBehaviour
     private float walkSpeed;
     [SerializeField]
     private float runSpeed;
+    [SerializeField]
+    private float jumpPower;
 
     public float GetWalkSpeed() => walkSpeed;
     public float GetRunSpeed() => runSpeed;
-
+    public float GetJumpPower() => jumpPower;
+    public Rigidbody GetRigidbody() => rb;
     private float playerSpeed;
     private StateMachine stateMachine;
     private bool onRun;
+    public bool onJump;
 
     private Animator childAnimator;
     private Rigidbody rb;
@@ -66,6 +70,10 @@ public class Player : MonoBehaviour
         onRun = true;
         stateMachine.SetState(new RunState(stateMachine, childAnimator,this));
     }
+    public void OnJump()
+    {
+        stateMachine.SetState(new JumpState(stateMachine, childAnimator, this));      
+    }
     public void OnAttack()
     {
         Debug.Log("attack");
@@ -75,6 +83,11 @@ public class Player : MonoBehaviour
         Vector3 move = position.normalized * playerSpeed * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + move);
 
+    }
+
+    public bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, Vector3.down, 1.1f, LayerMask.GetMask("Floor"));
     }
     public void SetSpeed(float speed)
     {
