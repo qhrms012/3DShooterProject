@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RunState : Istate
+public class WalkState : Istate
 {
     private StateMachine stateMachine;
     private Animator animator;
 
-    public RunState(StateMachine machine, Animator animator)
+    public WalkState(StateMachine machine, Animator animator)
     {
         stateMachine = machine;
         this.animator = animator;
     }
     public void Enter()
     {
-        animator.Play("Run");
+        animator.Play("Walk");
     }
 
     public void Execute(Vector3 playerVector)

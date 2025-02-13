@@ -21,7 +21,7 @@ public class IdleState : Istate
     {
         if(playerVector.magnitude > 0)
         {
-            stateMachine.SetState(new RunState(stateMachine, animator));
+            stateMachine.SetState(new WalkState(stateMachine, animator));
         }
     }
 
