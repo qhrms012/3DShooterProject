@@ -28,7 +28,11 @@ public class JumpState : Istate
 
     public void Execute(Vector3 playerVector)
     {
-
+        if (playerVector.magnitude > 0)
+        {
+            Vector3 move = playerVector.normalized * Time.fixedDeltaTime;
+            rb.MovePosition(rb.position + move);
+        }
     }
 
     public void Exit()

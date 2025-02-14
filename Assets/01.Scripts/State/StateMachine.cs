@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class StateMachine
 {
-    private Istate currentState;
+    public Istate currentState;
 
     public void SetState(Istate newState)
     {

@@ -51,6 +51,8 @@ public class Player : MonoBehaviour
     }
     private void UpdateMovementState()
     {
+        if (stateMachine.currentState is JumpState) return; // 점프 상태일 때는 변경하지 않음
+
         if (Input.GetKey(KeyCode.LeftShift))
         {
             OnRun();
@@ -61,7 +63,7 @@ public class Player : MonoBehaviour
             stateMachine.SetState(new WalkState(stateMachine, childAnimator, this));
         }
     }
-    private void OnTurn()
+    public void OnTurn()
     {
         transform.LookAt(transform.position + position);
     }
