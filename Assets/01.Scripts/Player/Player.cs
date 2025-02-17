@@ -12,10 +12,10 @@ public class Player : MonoBehaviour
     private float runSpeed;
     [SerializeField]
     private float jumpPower;
-    [SerializeField]
-    private GameObject[] weapons;
-    [SerializeField]
-    private bool[] hasWeapons;
+    
+    public GameObject[] weapons;
+    
+    public bool[] hasWeapons;
 
     public float GetWalkSpeed() => walkSpeed;
     public float GetRunSpeed() => runSpeed;
@@ -31,7 +31,8 @@ public class Player : MonoBehaviour
     public Vector3 position;
 
     private GameObject nearObject;
-    private GameObject equipWeapon;
+    public GameObject equipWeapon;
+    public int weaponIndex;
 
     private void Awake()
     {
@@ -109,34 +110,19 @@ public class Player : MonoBehaviour
     }
     public void OnSwap1()
     {
-        int weaponIndex = 0;
-        if(equipWeapon != null)
-        {
-            equipWeapon.SetActive(false);
-        }        
-        equipWeapon = weapons[weaponIndex];
-        equipWeapon.SetActive(true);
+        weaponIndex = 0;   
+        stateMachine.SetState(new SwapState(stateMachine, childAnimator,this));
 
     }
     public void OnSwap2()
     {
-        int weaponIndex = 1;
-        if (equipWeapon != null)
-        {
-            equipWeapon.SetActive(false);
-        }
-        equipWeapon = weapons[weaponIndex];
-        equipWeapon.SetActive(true);
+        weaponIndex = 1;
+        stateMachine.SetState(new SwapState(stateMachine, childAnimator, this));
     }
     public void OnSwap3()
     {
-        int weaponIndex = 2;
-        if (equipWeapon != null)
-        {
-            equipWeapon.SetActive(false);
-        }
-        equipWeapon = weapons[weaponIndex];
-        equipWeapon.SetActive(true);
+        weaponIndex = 2;
+        stateMachine.SetState(new SwapState(stateMachine, childAnimator, this));
     }
     private void OnCollisionEnter(Collision collision)
     {

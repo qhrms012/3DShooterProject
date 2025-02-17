@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &5916526 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1509416925549156319, guid: a2e051660762cbe4494c17a095a95e10, type: 3}
+  m_PrefabInstance: {fileID: 932203434}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &14005904
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -716,6 +721,16 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1027540148}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1065550502 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1348174882345252545, guid: c2ec4bfd1a6491c49a0c34b8dc3a7639, type: 3}
+  m_PrefabInstance: {fileID: 14005904}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1164088127 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 547435428816858648, guid: 203326381d9b54d489646c6c2f61f53a, type: 3}
+  m_PrefabInstance: {fileID: 1272164895}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1272164895
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1119,10 +1134,15 @@ MonoBehaviour:
   walkSpeed: 5
   runSpeed: 10
   jumpPower: 15
-  weapons: []
+  weapons:
+  - {fileID: 1065550502}
+  - {fileID: 5916526}
+  - {fileID: 1164088127}
   hasWeapons: 000000
   onJump: 0
   position: {x: 0, y: 0, z: 0}
+  equipWeapon: {fileID: 0}
+  weaponIndex: 0
 --- !u!136 &1679981090
 CapsuleCollider:
   m_ObjectHideFlags: 0
