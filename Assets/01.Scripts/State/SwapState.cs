@@ -7,17 +7,22 @@ public class SwapState : Istate
     private StateMachine stateMachine;
     private Animator animator;
     private Player player;
-    private Rigidbody rb;
+
     public SwapState(StateMachine machine, Animator animator, Player player)
     {
         stateMachine = machine;
         this.animator = animator;
         this.player = player;
-        this.rb = player.GetRigidbody();
     }
     public void Enter()
     {
-        animator.Play("Swap");        
+        player.SetMoveLock(true);
+        if (player.weapons[player.weaponIndex].activeSelf == true || 
+            !player.hasWeapons[player.weaponIndex])
+            return;       
+        animator.Play("Swap");
+        animator.GetComponent<Animator>().SetBool("IsSwapping", true);
+        
         if (player.equipWeapon != null)
         {
             player.equipWeapon.SetActive(false);
@@ -28,11 +33,9 @@ public class SwapState : Istate
 
     public void Execute(Vector3 playerVector)
     {
-        if (playerVector.magnitude > 0)
-        {
-            Vector3 move = playerVector.normalized * Time.fixedDeltaTime;
-            rb.MovePosition(rb.position + move);
-        }
+        animator.SetBool("IsSwapping", false);
+        player.SetMoveLock(false);
+        stateMachine.SetState(new IdleState(stateMachine, animator, player));       
     }
 
     public void Exit()

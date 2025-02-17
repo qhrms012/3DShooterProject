@@ -33,6 +33,8 @@ public class Player : MonoBehaviour
     private GameObject nearObject;
     public GameObject equipWeapon;
     public int weaponIndex;
+    
+    
 
     private void Awake()
     {
@@ -110,18 +112,21 @@ public class Player : MonoBehaviour
     }
     public void OnSwap1()
     {
-        weaponIndex = 0;   
+        weaponIndex = 0;
+        
         stateMachine.SetState(new SwapState(stateMachine, childAnimator,this));
 
     }
     public void OnSwap2()
     {
         weaponIndex = 1;
+        
         stateMachine.SetState(new SwapState(stateMachine, childAnimator, this));
     }
     public void OnSwap3()
     {
         weaponIndex = 2;
+        
         stateMachine.SetState(new SwapState(stateMachine, childAnimator, this));
     }
     private void OnCollisionEnter(Collision collision)
@@ -151,5 +156,9 @@ public class Player : MonoBehaviour
     public void SetSpeed(float speed)
     {
         playerSpeed = speed;
+    }
+    public void SetMoveLock(bool moveLock)
+    {
+        position = Vector3.zero;
     }
 }
