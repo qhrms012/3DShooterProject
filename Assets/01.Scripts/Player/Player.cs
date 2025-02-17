@@ -31,6 +31,8 @@ public class Player : MonoBehaviour
     public Vector3 position;
 
     private GameObject nearObject;
+    private GameObject equipWeapon;
+
     private void Awake()
     {
         childAnimator = GetComponentInChildren<Animator>();
@@ -104,6 +106,37 @@ public class Player : MonoBehaviour
                 Destroy(nearObject);
             }
         }
+    }
+    public void OnSwap1()
+    {
+        int weaponIndex = 0;
+        if(equipWeapon != null)
+        {
+            equipWeapon.SetActive(false);
+        }        
+        equipWeapon = weapons[weaponIndex];
+        equipWeapon.SetActive(true);
+
+    }
+    public void OnSwap2()
+    {
+        int weaponIndex = 1;
+        if (equipWeapon != null)
+        {
+            equipWeapon.SetActive(false);
+        }
+        equipWeapon = weapons[weaponIndex];
+        equipWeapon.SetActive(true);
+    }
+    public void OnSwap3()
+    {
+        int weaponIndex = 2;
+        if (equipWeapon != null)
+        {
+            equipWeapon.SetActive(false);
+        }
+        equipWeapon = weapons[weaponIndex];
+        equipWeapon.SetActive(true);
     }
     private void OnCollisionEnter(Collision collision)
     {
