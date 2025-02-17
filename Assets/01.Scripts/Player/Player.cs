@@ -12,6 +12,10 @@ public class Player : MonoBehaviour
     private float runSpeed;
     [SerializeField]
     private float jumpPower;
+    [SerializeField]
+    private GameObject[] weapons;
+    [SerializeField]
+    private bool[] hasWeapons;
 
     public float GetWalkSpeed() => walkSpeed;
     public float GetRunSpeed() => runSpeed;
@@ -26,6 +30,7 @@ public class Player : MonoBehaviour
     private Rigidbody rb;
     public Vector3 position;
 
+    private GameObject nearObject;
     private void Awake()
     {
         childAnimator = GetComponentInChildren<Animator>();
@@ -86,13 +91,40 @@ public class Player : MonoBehaviour
         rb.MovePosition(rb.position + move);
 
     }
+    public void OnInteration()
+    {
+        if(nearObject != null)
+        {
+            if(nearObject.tag == "Weapon")
+            {
+                Item item = nearObject.GetComponent<Item>();
+                int weaponIndex = item.value;
+                hasWeapons[weaponIndex] = true;
 
+                Destroy(nearObject);
+            }
+        }
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Floor"))
         {
             onJump = false; // 착지 시 점프 가능하도록 설정
             stateMachine.SetState(new LandState(stateMachine, childAnimator, this));
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.tag == "Weapon")
+        {
+            nearObject = other.gameObject;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Weapon")
+        {
+            nearObject = null;
         }
     }
 
