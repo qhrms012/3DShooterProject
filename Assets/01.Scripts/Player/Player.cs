@@ -12,7 +12,17 @@ public class Player : MonoBehaviour
     private float runSpeed;
     [SerializeField]
     private float jumpPower;
-    
+
+    public int ammo;
+    public int coin;
+    public int health;
+    public int hasGrenades;
+
+    public int maxAmmo;
+    public int maxCoin;
+    public int maxHealth;
+    public int maxhasGrenades;
+
     public GameObject[] weapons;
     
     public bool[] hasWeapons;
@@ -135,6 +145,38 @@ public class Player : MonoBehaviour
         {
             onJump = false; // 착지 시 점프 가능하도록 설정
             stateMachine.SetState(new LandState(stateMachine, childAnimator, this));
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Item")
+        {
+            Item item = other.GetComponent<Item>();
+            switch (item.type)
+            {
+                case Item.Type.Ammo:
+                    ammo += item.value;
+                    if(ammo > maxAmmo)
+                       ammo = maxAmmo;
+                    break;
+                case Item.Type.Coin:
+                    coin += item.value;
+                    if (coin > maxCoin)
+                        coin = maxCoin;
+                    break;
+                case Item.Type.Heart:
+                    health += item.value;
+                    if (health > maxHealth)
+                        health = maxHealth;
+                    break;
+                case Item.Type.Grenade:
+                    hasGrenades += item.value;
+                    if (hasGrenades > maxhasGrenades)
+                        hasGrenades = maxhasGrenades;
+                    break; 
+            }
+            Destroy(other.gameObject);
         }
     }
     private void OnTriggerStay(Collider other)
