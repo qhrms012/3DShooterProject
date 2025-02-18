@@ -25,10 +25,10 @@ public class SwapState : Istate
         
         if (player.equipWeapon != null)
         {
-            player.equipWeapon.SetActive(false);
+            player.equipWeapon.gameObject.SetActive(false);
         }
-        player.equipWeapon = player.weapons[player.weaponIndex];
-        player.equipWeapon.SetActive(true);
+        player.equipWeapon = player.weapons[player.weaponIndex].GetComponent<Weapon>();
+        player.equipWeapon.gameObject.SetActive(true);
     }
 
     public void Execute(Vector3 playerVector)

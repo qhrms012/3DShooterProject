@@ -28,6 +28,7 @@ public class Player : MonoBehaviour
 
     public bool[] hasWeapons;
 
+    
     public float GetWalkSpeed() => walkSpeed;
     public float GetRunSpeed() => runSpeed;
     public float GetJumpPower() => jumpPower;
@@ -42,9 +43,11 @@ public class Player : MonoBehaviour
     public Vector3 position;
 
     private GameObject nearObject;
-    public GameObject equipWeapon;
+    public Weapon equipWeapon;
     public int weaponIndex;
 
+    private float fireDelay;
+    private bool isFireReady;
     
     
 
@@ -100,7 +103,12 @@ public class Player : MonoBehaviour
     }
     public void OnAttack()
     {
-        Debug.Log("attack");
+        if(equipWeapon == null) return;
+
+        fireDelay += Time.deltaTime;
+        isFireReady = equipWeapon.rate < fireDelay;
+
+        
     }
     private void FixedUpdate()
     {
