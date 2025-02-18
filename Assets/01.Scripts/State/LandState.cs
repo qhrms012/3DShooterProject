@@ -24,7 +24,10 @@ public class LandState : Istate
 
     public void Execute(Vector3 position)
     {
-
+        if (!player.onJump)
+        {
+            stateMachine.SetState(new IdleState(stateMachine, animator, player));
+        }
     }
 
     public void Exit() 

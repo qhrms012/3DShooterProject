@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
 
     public bool[] hasWeapons;
 
-    
+
     public float GetWalkSpeed() => walkSpeed;
     public float GetRunSpeed() => runSpeed;
     public float GetJumpPower() => jumpPower;
@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     private StateMachine stateMachine;
     private bool onRun;
     public bool onJump;
+    public bool onAttack;
 
     private Animator childAnimator;
     private Rigidbody rb;
@@ -46,10 +47,10 @@ public class Player : MonoBehaviour
     public Weapon equipWeapon;
     public int weaponIndex;
 
-    private float fireDelay;
-    private bool isFireReady;
-    
-    
+    public float fireDelay;
+    public bool isFireReady;
+
+
 
     private void Awake()
     {
@@ -61,7 +62,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         playerSpeed = walkSpeed;
-        stateMachine.SetState(new IdleState(stateMachine, childAnimator,this));
+        stateMachine.SetState(new IdleState(stateMachine, childAnimator, this));
     }
     private void Update()
     {
@@ -78,15 +79,19 @@ public class Player : MonoBehaviour
     {
         if (stateMachine.currentState is JumpState) return; // 점프 상태일 때는 변경하지 않음
 
+        if (onAttack) return;
         if (Input.GetKey(KeyCode.LeftShift))
         {
             OnRun();
         }
-        else if (position.magnitude != 0)
+        else if (position.magnitude != 0 )
         {
             onRun = false;
             stateMachine.SetState(new WalkState(stateMachine, childAnimator, this));
         }
+
+
+
     }
     public void OnTurn()
     {
@@ -95,19 +100,22 @@ public class Player : MonoBehaviour
     public void OnRun()
     {
         onRun = true;
-        stateMachine.SetState(new RunState(stateMachine, childAnimator,this));
+        stateMachine.SetState(new RunState(stateMachine, childAnimator, this));
     }
     public void OnJump()
     {
-        stateMachine.SetState(new JumpState(stateMachine, childAnimator, this));      
+        stateMachine.SetState(new JumpState(stateMachine, childAnimator, this));
     }
     public void OnAttack()
     {
-        if(equipWeapon == null) return;
-
-        fireDelay += Time.deltaTime;
-        isFireReady = equipWeapon.rate < fireDelay;
-
+        if(stateMachine.currentState is RunState)
+        {
+            stateMachine.SetState(new MeleeState(stateMachine, childAnimator, this, equipWeapon));
+        }
+        else
+        {
+            stateMachine.SetState(new MeleeState(stateMachine, childAnimator, this, equipWeapon));
+        }
         
     }
     private void FixedUpdate()
@@ -118,9 +126,9 @@ public class Player : MonoBehaviour
     }
     public void OnInteration()
     {
-        if(nearObject != null)
+        if (nearObject != null)
         {
-            if(nearObject.tag == "Weapon")
+            if (nearObject.tag == "Weapon")
             {
                 Item item = nearObject.GetComponent<Item>();
                 int weaponIndex = item.value;
@@ -133,20 +141,20 @@ public class Player : MonoBehaviour
     public void OnSwap1()
     {
         weaponIndex = 0;
-        
-        stateMachine.SetState(new SwapState(stateMachine, childAnimator,this));
+
+        stateMachine.SetState(new SwapState(stateMachine, childAnimator, this));
 
     }
     public void OnSwap2()
     {
         weaponIndex = 1;
-        
+
         stateMachine.SetState(new SwapState(stateMachine, childAnimator, this));
     }
     public void OnSwap3()
     {
         weaponIndex = 2;
-        
+
         stateMachine.SetState(new SwapState(stateMachine, childAnimator, this));
     }
     private void OnCollisionEnter(Collision collision)
@@ -160,15 +168,15 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Item")
+        if (other.tag == "Item")
         {
             Item item = other.GetComponent<Item>();
             switch (item.type)
             {
                 case Item.Type.Ammo:
                     ammo += item.value;
-                    if(ammo > maxAmmo)
-                       ammo = maxAmmo;
+                    if (ammo > maxAmmo)
+                        ammo = maxAmmo;
                     break;
                 case Item.Type.Coin:
                     coin += item.value;
@@ -185,14 +193,14 @@ public class Player : MonoBehaviour
                     hasGrenades += item.value;
                     if (hasGrenades > maxhasGrenades)
                         hasGrenades = maxhasGrenades;
-                    break; 
+                    break;
             }
             Destroy(other.gameObject);
         }
     }
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Weapon")
+        if (other.tag == "Weapon")
         {
             nearObject = other.gameObject;
         }

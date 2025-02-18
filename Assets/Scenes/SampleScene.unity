@@ -142,7 +142,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1348174882345252545, guid: c2ec4bfd1a6491c49a0c34b8dc3a7639, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1348174882345252545, guid: c2ec4bfd1a6491c49a0c34b8dc3a7639, type: 3}
       propertyPath: m_TagString
@@ -21543,6 +21543,8 @@ MonoBehaviour:
   position: {x: 0, y: 0, z: 0}
   equipWeapon: {fileID: 0}
   weaponIndex: 0
+  fireDelay: 0
+  isFireReady: 0
 --- !u!136 &1679981090
 CapsuleCollider:
   m_ObjectHideFlags: 0

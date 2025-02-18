@@ -12,18 +12,4 @@ public class Weapon : MonoBehaviour
     public TrailRenderer trailEffect;
 
     
-    public void Use()
-    {
-        if(type == Type.Melee )
-        {
-            Swing();
-        }
-    }
-
-    IEnumerator Swing()
-    {
-
-
-        yield return null;
-    }
 }
