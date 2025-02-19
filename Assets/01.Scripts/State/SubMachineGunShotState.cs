@@ -22,13 +22,16 @@ public class SubMachineGunShotState : Istate
             stateMachine.SetState(new IdleState(stateMachine, animator, player)); // IdleState·Î º¯°æ
             return;
         }
-        animator.Play("Shot");
-        player.StartCoroutine(SubMachineShot());
+        if (player.isFireReady)
+        {
+            animator.Play("Shot");
+            player.StartCoroutine(SubMachineShot());
+        }
     }
 
     public void Execute(Vector3 playerVector)
     {
-        
+        player.fireDelay += Time.deltaTime;
     }
 
     public void Exit()

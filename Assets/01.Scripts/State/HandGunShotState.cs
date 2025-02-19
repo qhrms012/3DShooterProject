@@ -22,13 +22,18 @@ public class HandGunShotState : Istate
             stateMachine.SetState(new IdleState(stateMachine, animator, player)); // IdleState·Î º¯°æ
             return;
         }
-        animator.Play("Shot");
-        player.StartCoroutine(HandGunShot());
+        player.isFireReady = player.equipWeapon.rate < player.fireDelay;
+        if (player.isFireReady) 
+        {
+            animator.Play("Shot");
+            player.StartCoroutine(HandGunShot());
+        }
+        
     }
 
     public void Execute(Vector3 playerVector)
     {
-        
+        player.fireDelay += Time.deltaTime;
     }
 
     public void Exit()
