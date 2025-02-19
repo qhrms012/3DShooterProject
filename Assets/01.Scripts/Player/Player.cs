@@ -108,14 +108,40 @@ public class Player : MonoBehaviour
     }
     public void OnAttack()
     {
-        if(stateMachine.currentState is RunState)
+        if (equipWeapon.type == Weapon.Type.Melee)
         {
-            stateMachine.SetState(new MeleeState(stateMachine, childAnimator, this, equipWeapon));
+            if (stateMachine.currentState is RunState)
+            {
+                stateMachine.SetState(new MeleeState(stateMachine, childAnimator, this, equipWeapon));
+            }
+            else
+            {
+                stateMachine.SetState(new MeleeState(stateMachine, childAnimator, this, equipWeapon));
+            }
         }
-        else
+        else if(equipWeapon.type == Weapon.Type.HandGun)
         {
-            stateMachine.SetState(new MeleeState(stateMachine, childAnimator, this, equipWeapon));
+            if (stateMachine.currentState is RunState)
+            {
+                stateMachine.SetState(new HandGunShotState(stateMachine, childAnimator, this, equipWeapon));
+            }
+            else
+            {
+                stateMachine.SetState(new HandGunShotState(stateMachine, childAnimator, this, equipWeapon));
+            }
         }
+        else if(equipWeapon.type == Weapon.Type.SubMachine)
+        {
+            if (stateMachine.currentState is RunState)
+            {
+                stateMachine.SetState(new SubMachineGunShotState(stateMachine, childAnimator, this, equipWeapon));
+            }
+            else
+            {
+                stateMachine.SetState(new SubMachineGunShotState(stateMachine, childAnimator, this, equipWeapon));
+            }
+        }
+        
         
     }
     private void FixedUpdate()

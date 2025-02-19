@@ -8,6 +8,9 @@ TagManager:
   - Item
   - Weapon
   - Melee
+  - HandGun
+  - SubMachine
+  - Wall
   layers:
   - Default
   - TransparentFX
