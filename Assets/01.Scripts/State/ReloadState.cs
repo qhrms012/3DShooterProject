@@ -20,7 +20,7 @@ public class ReloadState : Istate
         animator.Play("Reload");
         int reAmmo = player.ammo < weapon.maxAmmo ? player.ammo : weapon.maxAmmo;
         weapon.curAmmo = reAmmo;
-        player.ammo = reAmmo;
+        player.ammo -= reAmmo;
 
     }
 
