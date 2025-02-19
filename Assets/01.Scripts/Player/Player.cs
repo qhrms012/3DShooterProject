@@ -108,41 +108,32 @@ public class Player : MonoBehaviour
     }
     public void OnAttack()
     {
+        Debug.Log($"현재 장착 무기 :{equipWeapon.type}");
         if (equipWeapon.type == Weapon.Type.Melee)
         {
-            if (stateMachine.currentState is RunState)
-            {
-                stateMachine.SetState(new MeleeState(stateMachine, childAnimator, this, equipWeapon));
-            }
-            else
-            {
-                stateMachine.SetState(new MeleeState(stateMachine, childAnimator, this, equipWeapon));
-            }
+            stateMachine.SetState(new MeleeState(stateMachine, childAnimator, this, equipWeapon));
         }
-        else if(equipWeapon.type == Weapon.Type.HandGun)
+        else if (equipWeapon.type == Weapon.Type.HandGun)
         {
-            if (stateMachine.currentState is RunState)
-            {
-                stateMachine.SetState(new HandGunShotState(stateMachine, childAnimator, this, equipWeapon));
-            }
-            else
-            {
-                stateMachine.SetState(new HandGunShotState(stateMachine, childAnimator, this, equipWeapon));
-            }
+            stateMachine.SetState(new HandGunShotState(stateMachine, childAnimator, this, equipWeapon));
         }
-        else if(equipWeapon.type == Weapon.Type.SubMachine)
+        else if (equipWeapon.type == Weapon.Type.SubMachine)
         {
-            if (stateMachine.currentState is RunState)
-            {
-                stateMachine.SetState(new SubMachineGunShotState(stateMachine, childAnimator, this, equipWeapon));
-            }
-            else
-            {
-                stateMachine.SetState(new SubMachineGunShotState(stateMachine, childAnimator, this, equipWeapon));
-            }
+            stateMachine.SetState(new SubMachineGunShotState(stateMachine, childAnimator, this, equipWeapon));
         }
-        
-        
+        Debug.Log($"새로운 상태 : {stateMachine.currentState?.GetType().Name}"); // 상태 변경 후 확인
+    }
+    public void OnReload()
+    {
+        if (equipWeapon == null)
+            return;
+        if (equipWeapon.type == Weapon.Type.Melee)
+            return;
+        if (ammo == 0)
+            return;
+        if (stateMachine.currentState is RunState && stateMachine.currentState is JumpState)
+            return;
+        stateMachine.SetState(new ReloadState(stateMachine, childAnimator, this, equipWeapon));
     }
     private void FixedUpdate()
     {

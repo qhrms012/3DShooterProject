@@ -78,7 +78,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Reroad",
+                    "name": "Reload",
                     "type": "Button",
                     "id": "c8fb3e49-d4af-482a-8a59-6f7395eb898f",
                     "expectedControlType": "Button",
@@ -227,7 +227,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Reroad",
+                    "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

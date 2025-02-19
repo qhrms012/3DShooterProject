@@ -17,13 +17,16 @@ public class SubMachineGunShotState : Istate
     }
     public void Enter()
     {
-        if (player.equipWeapon == null)
+        Debug.Log($"Weapon Ammo: {weapon.curAmmo}, Is Fire Ready: {player.isFireReady}");
+        if (player.equipWeapon == null && weapon.curAmmo <= 0)
         {
             stateMachine.SetState(new IdleState(stateMachine, animator, player)); // IdleState·Î º¯°æ
             return;
         }
-        if (player.isFireReady)
+        player.isFireReady = player.equipWeapon.rate < player.fireDelay;
+        if (player.isFireReady && weapon.curAmmo > 0)
         {
+            weapon.curAmmo --;
             animator.Play("Shot");
             player.StartCoroutine(SubMachineShot());
         }

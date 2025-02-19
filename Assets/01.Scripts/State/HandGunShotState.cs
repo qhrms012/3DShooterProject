@@ -17,14 +17,15 @@ public class HandGunShotState : Istate
     }
     public void Enter()
     {
-        if (player.equipWeapon == null)
+        if (player.equipWeapon == null && weapon.curAmmo <= 0)
         {
             stateMachine.SetState(new IdleState(stateMachine, animator, player)); // IdleState·Î º¯°æ
             return;
         }
         player.isFireReady = player.equipWeapon.rate < player.fireDelay;
-        if (player.isFireReady) 
+        if (player.isFireReady && weapon.curAmmo > 0) 
         {
+            weapon.curAmmo --;
             animator.Play("Shot");
             player.StartCoroutine(HandGunShot());
         }
