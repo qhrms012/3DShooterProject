@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float jumpPower;
 
+    public Camera followCamera;
     public int ammo;
     public int coin;
     public int health;
@@ -96,6 +97,18 @@ public class Player : MonoBehaviour
     public void OnTurn()
     {
         transform.LookAt(transform.position + position);
+
+        if (Input.GetMouseButton(0))
+        {
+            Ray ray = followCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit rayHit;
+            if (Physics.Raycast(ray, out rayHit, 100))
+            {
+                Vector3 nextVec = rayHit.point - transform.position;
+                nextVec.y = 0;
+                transform.LookAt(transform.position + nextVec);
+            }
+        }
     }
     public void OnRun()
     {
