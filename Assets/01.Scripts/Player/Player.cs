@@ -148,10 +148,16 @@ public class Player : MonoBehaviour
             return;
         stateMachine.SetState(new ReloadState(stateMachine, childAnimator, this, equipWeapon));
     }
+
+    private void FreezeRotation()
+    {
+        rb.angularVelocity = Vector3.zero;
+    }
     private void FixedUpdate()
     {
         Vector3 move = position.normalized * playerSpeed * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + move);
+        FreezeRotation();
 
     }
     public void OnInteration()
