@@ -19,6 +19,11 @@ public class GrenadeState : Istate
     {
         animator.Play("Throw");
         GameObject poolGrenade = GameManager.Instance.objectpool.Get(3);
+
+        Grenade grenadeScript = poolGrenade.GetComponent<Grenade>();
+        grenadeScript.ResetGrenade();  // 초기화
+        grenadeScript.Throw();  
+
         // 플레이어 앞쪽에 소환되도록 위치 설정
         Vector3 spawnPosition = player.transform.position + player.transform.forward * 1.5f + Vector3.up * 1.0f;
         poolGrenade.transform.position = spawnPosition;
