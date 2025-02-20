@@ -10311,7 +10311,7 @@ GameObject:
   - component: {fileID: 453065500}
   - component: {fileID: 453065504}
   - component: {fileID: 453065505}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10443,8 +10443,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd580f1c827742d46ba25c33355f517c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  curHealth: 100
+  maxHealth: 60
+  curHealth: 60
 --- !u!1 &560454390
 GameObject:
   m_ObjectHideFlags: 0

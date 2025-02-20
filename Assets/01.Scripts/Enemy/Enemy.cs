@@ -23,17 +23,22 @@ public class Enemy : MonoBehaviour
         {
             Weapon weapon = other.GetComponent<Weapon>();
             curHealth -= weapon.damage;
-            StartCoroutine(OnDamage());
+            Vector3 reactVec = transform.position - other.transform.position;
+
+            StartCoroutine(OnDamage(reactVec));
         }
         else if(other.tag == "Bullet")
         {
             Bullet bullet = other.GetComponent<Bullet>();
             curHealth -= bullet.damage;
-            StartCoroutine(OnDamage());
+            Vector3 reactVec = transform.position - other.transform.position;
+            other.gameObject.SetActive(false);
+
+            StartCoroutine(OnDamage(reactVec));
         }
     }
 
-    IEnumerator OnDamage()
+    IEnumerator OnDamage(Vector3 reactVec)
     {
         mat.color = Color.red;
         yield return new WaitForSeconds(0.1f);
@@ -45,6 +50,11 @@ public class Enemy : MonoBehaviour
         else
         {
             mat.color = Color.gray;
+            gameObject.layer = 11;
+
+            reactVec = reactVec.normalized;
+            reactVec += Vector3.up;
+            rb.AddForce(reactVec * 5, ForceMode.Impulse);
             Destroy(gameObject, 4);
         }
     }
