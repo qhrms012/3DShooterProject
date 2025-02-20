@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     public int coin;
     public int health;
     public int hasGrenades;
+    public GameObject grenadeObj;
 
     public int maxAmmo;
     public int maxCoin;
