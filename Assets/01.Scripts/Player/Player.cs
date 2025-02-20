@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     private bool onRun;
     public bool onJump;
     public bool onAttack;
+    private bool isBorder;
 
     private Animator childAnimator;
     private Rigidbody rb;
@@ -153,11 +154,22 @@ public class Player : MonoBehaviour
     {
         rb.angularVelocity = Vector3.zero;
     }
+    private void StopToWall()
+    {
+        Debug.DrawRay(transform.position, transform.forward * 5, Color.green);
+        isBorder = Physics.Raycast(transform.position, transform.forward,
+            5, LayerMask.GetMask("Wall"));
+
+    }
     private void FixedUpdate()
     {
-        Vector3 move = position.normalized * playerSpeed * Time.fixedDeltaTime;
-        rb.MovePosition(rb.position + move);
+        if (!isBorder)
+        {
+            Vector3 move = position.normalized * playerSpeed * Time.fixedDeltaTime;
+            rb.MovePosition(rb.position + move);
+        }
         FreezeRotation();
+        StopToWall();
 
     }
     public void OnInteration()
