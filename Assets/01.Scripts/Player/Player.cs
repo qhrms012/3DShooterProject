@@ -92,9 +92,6 @@ public class Player : MonoBehaviour
             onRun = false;
             stateMachine.SetState(new WalkState(stateMachine, childAnimator, this));
         }
-
-
-
     }
     public void OnTurn()
     {
@@ -150,7 +147,22 @@ public class Player : MonoBehaviour
             return;
         stateMachine.SetState(new ReloadState(stateMachine, childAnimator, this, equipWeapon));
     }
+    public void OnGrenade()
+    {
+        if (hasGrenades == 0)
+            return;
 
+        Ray ray = followCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit rayHit;
+        if (Physics.Raycast(ray, out rayHit, 100))
+        {
+            Vector3 nextVec = rayHit.point - transform.position;
+            nextVec.y = 0;
+            
+            stateMachine.SetState(new GrenadeState(stateMachine,childAnimator, this, equipWeapon));
+        }
+
+    }
     private void FreezeRotation()
     {
         rb.angularVelocity = Vector3.zero;
