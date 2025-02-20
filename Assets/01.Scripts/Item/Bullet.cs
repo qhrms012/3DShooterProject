@@ -21,4 +21,5 @@ public class Bullet : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+
 }

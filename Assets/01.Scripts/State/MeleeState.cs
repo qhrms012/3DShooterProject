@@ -57,11 +57,11 @@ public class MeleeState : Istate
     }
     IEnumerator Swing()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.4f);
         weapon.meleeArea.enabled = true;
         weapon.trailEffect.enabled = true;
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.1f);
         weapon.meleeArea.enabled = false;
 
         yield return new WaitForSeconds(0.3f);
