@@ -26,7 +26,7 @@ public class GrenadeState : Istate
         Rigidbody rigidGrenade = poolGrenade.GetComponent<Rigidbody>();
 
         // 플레이어방향으로 힘을 주기
-        rigidGrenade.AddForce(player.transform.forward * 10 + Vector3.up * 3, ForceMode.Impulse);
+        rigidGrenade.AddForce(player.transform.forward * 10 + Vector3.up * 10, ForceMode.Impulse);
         rigidGrenade.AddTorque(Vector3.back * 10, ForceMode.Impulse);
 
         player.hasGrenades--;
