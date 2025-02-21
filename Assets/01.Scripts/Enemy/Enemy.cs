@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     public int maxHealth;
     public int curHealth;
     public Transform target;
-
+    private StateMachine stateMachine;
 
     private Rigidbody rb;
     private BoxCollider bc;
@@ -22,10 +22,18 @@ public class Enemy : MonoBehaviour
         mat = GetComponentInChildren<MeshRenderer>().material;
         agent = GetComponent<NavMeshAgent>();
         childAnimator = GetComponentInChildren<Animator>();
+
+        stateMachine = new StateMachine();
+        
+        
+    }
+    private void Start()
+    {
+        stateMachine.SetState(new ChaseState(stateMachine, childAnimator, agent, target));
     }
     private void Update()
     {
-        agent.SetDestination(target.position);       
+        stateMachine.Update(target.position);
     }
     private void FixedUpdate()
     {
@@ -95,6 +103,4 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject, 4);
         }
     }
-
-
 }

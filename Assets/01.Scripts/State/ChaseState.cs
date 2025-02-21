@@ -1,18 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class ChaseState : MonoBehaviour
+public class ChaseState : Istate
 {
-    // Start is called before the first frame update
-    void Start()
+    private StateMachine stateMachine;
+    private Animator animator;
+    private NavMeshAgent agent;
+    private Transform target;
+
+    public ChaseState(StateMachine machine, Animator animator, NavMeshAgent agent, Transform target)
+    {
+        stateMachine = machine;
+        this.animator = animator;
+        this.agent = agent;
+        this.target = target;
+    }
+    public void Enter()
+    {      
+        animator.Play("Walk");
+    }
+
+    public void Execute(Vector3 playerVector)
+    {        
+        agent.SetDestination(target.position);
+    }
+
+    public void Exit()
     {
         
     }
-
-    // Update is called once per frame
-    void Update()
+    public void SetTarget(Transform newTarget)
     {
-        
+        target = newTarget;
     }
 }
