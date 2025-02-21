@@ -1,22 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
     public int maxHealth;
     public int curHealth;
+    public Transform target;
+
 
     private Rigidbody rb;
     private BoxCollider bc;
     private Material mat;
+    private NavMeshAgent agent;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
         mat = GetComponentInChildren<MeshRenderer>().material;
+        agent = GetComponent<NavMeshAgent>();
     }
-
+    private void Update()
+    {
+        agent.SetDestination(target.position);       
+    }
+    private void FixedUpdate()
+    {
+        FreezeRotation();
+    }
+    private void FreezeRotation()
+    {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;      
+    }
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Melee")
