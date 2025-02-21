@@ -31,8 +31,4 @@ public class ChaseState : Istate
     {
         
     }
-    public void SetTarget(Transform newTarget)
-    {
-        target = newTarget;
-    }
 }
