@@ -14,12 +14,14 @@ public class Enemy : MonoBehaviour
     private BoxCollider bc;
     private Material mat;
     private NavMeshAgent agent;
+    private Animator childAnimator;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
         mat = GetComponentInChildren<MeshRenderer>().material;
         agent = GetComponent<NavMeshAgent>();
+        childAnimator = GetComponentInChildren<Animator>();
     }
     private void Update()
     {
