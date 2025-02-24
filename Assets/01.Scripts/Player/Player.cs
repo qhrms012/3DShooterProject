@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public int health;
     public int hasGrenades;
     public GameObject grenadeObj;
+    private MeshRenderer[] meshs;
 
     public int maxAmmo;
     public int maxCoin;
@@ -37,10 +38,12 @@ public class Player : MonoBehaviour
     public Rigidbody GetRigidbody() => rb;
     private float playerSpeed;
     private StateMachine stateMachine;
+
     private bool onRun;
     public bool onJump;
     public bool onAttack;
     private bool isBorder;
+    private bool isDamage;
 
     private Animator childAnimator;
     private Rigidbody rb;
@@ -60,6 +63,7 @@ public class Player : MonoBehaviour
         childAnimator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
         stateMachine = new StateMachine();
+        meshs = GetComponentsInChildren<MeshRenderer>();
 
     }
     private void Start()
@@ -258,6 +262,31 @@ public class Player : MonoBehaviour
             }
             Destroy(other.gameObject);
         }
+        else if(other.tag == "EnemyBullet")
+        {
+            if (!isDamage)
+            {
+                Bullet enemyBullet = other.GetComponent<Bullet>();
+                health -= enemyBullet.damage;
+                StartCoroutine(OnDamage());
+            }           
+        }
+    }
+    IEnumerator OnDamage()
+    {
+        isDamage = true;
+        foreach(MeshRenderer mesh in meshs)
+        {
+            mesh.material.color = Color.red;
+        }
+        yield return new WaitForSeconds(1f);
+
+        foreach (MeshRenderer mesh in meshs)
+        {
+            mesh.material.color = Color.white;
+        }
+        isDamage = false;
+
     }
     private void OnTriggerStay(Collider other)
     {
