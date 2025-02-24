@@ -23,8 +23,9 @@ public class ChaseState : Istate
     }
 
     public void Execute(Vector3 playerVector)
-    {        
-        agent.SetDestination(target.position);
+    {
+        if (agent.enabled) 
+            agent.SetDestination(target.position);
     }
 
     public void Exit()

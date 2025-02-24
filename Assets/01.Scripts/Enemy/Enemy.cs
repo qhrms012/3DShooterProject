@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     public int maxHealth;
     public int curHealth;
     public Transform target;
+    public BoxCollider meleeArea;
     private StateMachine stateMachine;
 
     private Rigidbody rb;
@@ -15,6 +16,7 @@ public class Enemy : MonoBehaviour
     private Material mat;
     private NavMeshAgent agent;
     private Animator childAnimator;
+    public bool isAttack;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -35,15 +37,32 @@ public class Enemy : MonoBehaviour
     {
         stateMachine.Update(target.position);
     }
+    
     private void FixedUpdate()
     {
         FreezeRotation();
+        TargetTing();
     }
     private void FreezeRotation()
     {
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;      
     }
+    private void TargetTing()
+    {
+        float targetRadius = 1.5f;
+        float targetRange = 3f;
+
+        RaycastHit[] rayHits = 
+            Physics.SphereCastAll(transform.position,targetRadius,transform.forward,targetRange,
+                                                            LayerMask.GetMask("Player"));
+
+        if(rayHits.Length > 0 && !isAttack)
+        {
+            stateMachine.SetState(new EnemyAttackState(stateMachine, childAnimator, meleeArea, this));
+        }
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Melee")
@@ -103,4 +122,15 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject, 4);
         }
     }
+
+    public NavMeshAgent GetAgent()
+    {
+        return agent;
+    }
+
+    public Animator GetAnimator()
+    {
+        return childAnimator;
+    }
+
 }
