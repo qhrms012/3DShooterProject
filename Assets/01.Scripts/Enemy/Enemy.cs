@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    public enum Type { A, B, C };
+    public Type enemyType;
     public int maxHealth;
     public int curHealth;
     public Transform target;
@@ -50,16 +52,30 @@ public class Enemy : MonoBehaviour
     }
     private void TargetTing()
     {
-        float targetRadius = 1.5f;
-        float targetRange = 3f;
+        float targetRadius = 0;
+        float targetRange = 0;
 
+        switch (enemyType)
+        {
+            case Type.A:
+                targetRadius = 1.5f;
+                targetRange = 3f;
+                break;
+            case Type.B:
+                targetRadius = 1f;
+                targetRange = 12f;
+                break;
+            case Type.C:
+
+                break;
+        }
         RaycastHit[] rayHits = 
             Physics.SphereCastAll(transform.position,targetRadius,transform.forward,targetRange,
                                                             LayerMask.GetMask("Player"));
 
         if(rayHits.Length > 0 && !isAttack)
         {
-            stateMachine.SetState(new EnemyAttackState(stateMachine, childAnimator, meleeArea, this));
+            stateMachine.SetState(new EnemyAttackState(stateMachine, childAnimator, meleeArea, this, rb));
         }
     }
     
