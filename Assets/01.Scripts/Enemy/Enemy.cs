@@ -66,7 +66,8 @@ public class Enemy : MonoBehaviour
                 targetRange = 12f;
                 break;
             case Type.C:
-
+                targetRadius = 0.5f;
+                targetRange = 25f;
                 break;
         }
         RaycastHit[] rayHits = 

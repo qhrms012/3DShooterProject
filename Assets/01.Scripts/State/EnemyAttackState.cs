@@ -62,8 +62,19 @@ public class EnemyAttackState : Istate
                 break;
 
             case Enemy.Type.C:
+                yield return new WaitForSeconds(0.5f);
+                GameObject enemyBullet = GameManager.Instance.objectpool.Get(4);
+                Rigidbody rigidBullet = enemyBullet.GetComponent<Rigidbody>();
 
+                // 총알의 위치를 적의 위치 + y축 5만큼 위로 설정
+                Vector3 bulletSpawnPosition = enemy.transform.position + new Vector3(0, 2f, 0);
 
+                enemyBullet.transform.position = bulletSpawnPosition;
+                enemyBullet.transform.rotation = enemy.transform.rotation;
+
+                rigidBullet.velocity = enemy.transform.forward * 20;
+
+                yield return new WaitForSeconds(2f);
                 break;
 
         }
