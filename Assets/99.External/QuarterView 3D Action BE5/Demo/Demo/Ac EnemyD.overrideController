@@ -9,7 +9,13 @@ AnimatorOverrideController:
   m_Name: Ac EnemyD
   m_Controller: {fileID: 9100000, guid: f98c2a62bf9133448ba3607bcdffadb6, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: -8945691123924629249, guid: cae3f9537776dea41855a724b56dd2c9,
-      type: 3}
-    m_OverrideClip: {fileID: -8945691123924629249, guid: a43df65176acc724e8d74ed0d0e8986a,
-      type: 3}
+  - m_OriginalClip: {fileID: -8945691123924629249, guid: cae3f9537776dea41855a724b56dd2c9, type: 3}
+    m_OverrideClip: {fileID: -8945691123924629249, guid: a43df65176acc724e8d74ed0d0e8986a, type: 3}
+  - m_OriginalClip: {fileID: -2459116968204564406, guid: cae3f9537776dea41855a724b56dd2c9, type: 3}
+    m_OverrideClip: {fileID: 6652763523632262317, guid: a43df65176acc724e8d74ed0d0e8986a, type: 3}
+  - m_OriginalClip: {fileID: 6059336001588132254, guid: cae3f9537776dea41855a724b56dd2c9, type: 3}
+    m_OverrideClip: {fileID: 6059336001588132254, guid: a43df65176acc724e8d74ed0d0e8986a, type: 3}
+  - m_OriginalClip: {fileID: 230416604625677440, guid: a43df65176acc724e8d74ed0d0e8986a, type: 3}
+    m_OverrideClip: {fileID: 230416604625677440, guid: a43df65176acc724e8d74ed0d0e8986a, type: 3}
+  - m_OriginalClip: {fileID: -9032938285234064413, guid: a43df65176acc724e8d74ed0d0e8986a, type: 3}
+    m_OverrideClip: {fileID: -9032938285234064413, guid: a43df65176acc724e8d74ed0d0e8986a, type: 3}
