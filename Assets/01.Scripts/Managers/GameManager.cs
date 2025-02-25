@@ -8,7 +8,7 @@ public class GameManager : Singleton<GameManager>
     public ObjectPool objectpool;
     private void Awake()
     {
-        
+        Application.targetFrameRate = 60;
     }
 
 }
