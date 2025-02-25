@@ -5,25 +5,25 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    public enum Type { A, B, C };
+    public enum Type { A, B, C ,D};
     public Type enemyType;
     public int maxHealth;
     public int curHealth;
     public Transform target;
     public BoxCollider meleeArea;
-    private StateMachine stateMachine;
+    public StateMachine stateMachine;
 
-    private Rigidbody rb;
-    private BoxCollider bc;
-    private Material mat;
-    private NavMeshAgent agent;
-    private Animator childAnimator;
+    public Rigidbody rb;
+    public BoxCollider bc;
+    public MeshRenderer[] meshs;
+    public NavMeshAgent agent;
+    public Animator childAnimator;
     public bool isAttack;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
-        mat = GetComponentInChildren<MeshRenderer>().material;
+        meshs = GetComponentsInChildren<MeshRenderer>();
         agent = GetComponent<NavMeshAgent>();
         childAnimator = GetComponentInChildren<Animator>();
 
@@ -109,16 +109,21 @@ public class Enemy : MonoBehaviour
 
     IEnumerator OnDamage(Vector3 reactVec, bool isGrenade)
     {
-        mat.color = Color.red;
+        foreach(MeshRenderer mesh in meshs) 
+            mesh.material.color = Color.red;
+        
         yield return new WaitForSeconds(0.1f);
 
         if(curHealth > 0)
         {
-            mat.color = Color.white;
+            foreach (MeshRenderer mesh in meshs)
+                mesh.material.color = Color.white;
         }
         else
         {
-            mat.color = Color.gray;
+            foreach (MeshRenderer mesh in meshs)
+                mesh.material.color = Color.gray;
+
             gameObject.layer = 11;
 
             if (isGrenade)

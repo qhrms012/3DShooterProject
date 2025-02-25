@@ -5231,6 +5231,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3320669544841490502, guid: 06d503bba93001142b96e3510906db62, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3320669544841490502, guid: 06d503bba93001142b96e3510906db62, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -5325,6 +5329,11 @@ MonoBehaviour:
   curHealth: 200
   target: {fileID: 5903297866515463226}
   meleeArea: {fileID: 0}
+  rb: {fileID: 0}
+  bc: {fileID: 0}
+  meshs: []
+  agent: {fileID: 0}
+  childAnimator: {fileID: 0}
   isAttack: 0
 --- !u!195 &126438031
 NavMeshAgent:
@@ -11066,6 +11075,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9187343066701982198, guid: 4198e2587d1fcca4cb87c16c3cfed34d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187343066701982198, guid: 4198e2587d1fcca4cb87c16c3cfed34d, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -11119,6 +11132,11 @@ MonoBehaviour:
   curHealth: 80
   target: {fileID: 5903297866515463226}
   meleeArea: {fileID: 959859205}
+  rb: {fileID: 0}
+  bc: {fileID: 0}
+  meshs: []
+  agent: {fileID: 0}
+  childAnimator: {fileID: 0}
   isAttack: 0
 --- !u!65 &865922343
 BoxCollider:
@@ -16905,6 +16923,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 328409505970683906, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 328409505970683906, guid: 464cc7c4f7ea10b47a36d7848aa9ca9a, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -17037,6 +17059,11 @@ MonoBehaviour:
   curHealth: 50
   target: {fileID: 5903297866515463226}
   meleeArea: {fileID: 1847744318}
+  rb: {fileID: 0}
+  bc: {fileID: 0}
+  meshs: []
+  agent: {fileID: 0}
+  childAnimator: {fileID: 0}
   isAttack: 0
 --- !u!65 &1285766469
 BoxCollider:
@@ -17281,6 +17308,7 @@ MonoBehaviour:
   - {fileID: 1447812995555570674, guid: 82432cbb621911d47bbdd0a7d5a2f532, type: 3}
   - {fileID: 8886129868591152856, guid: 3f824434422137f4a8accd2d979b5abf, type: 3}
   - {fileID: 1755917601220099213, guid: 8f14a932914b1cf4f925ef2d2ac30784, type: 3}
+  - {fileID: 6913595091022656285, guid: add4eacef0384154787eccf294e452dc, type: 3}
 --- !u!4 &1399152174
 Transform:
   m_ObjectHideFlags: 0
@@ -17466,6 +17494,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7988094277207216310, guid: 83dab506297948d4d8d34c4fe12431ee, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1420910011}
+    - targetCorrespondingSourceObject: {fileID: 7988094277207216310, guid: 83dab506297948d4d8d34c4fe12431ee, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1919431293}
     - targetCorrespondingSourceObject: {fileID: 3773346728750375572, guid: 83dab506297948d4d8d34c4fe12431ee, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1420910010}
@@ -18388,6 +18419,32 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9133255185617633366, guid: 83dab506297948d4d8d34c4fe12431ee, type: 3}
   m_PrefabInstance: {fileID: 1420910005}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1919431293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420910006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7b6325b883b7a84eb870c396189a98f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyType: 3
+  maxHealth: 100
+  curHealth: 100
+  target: {fileID: 5903297866515463226}
+  meleeArea: {fileID: 1981622960}
+  rb: {fileID: 0}
+  bc: {fileID: 0}
+  meshs: []
+  agent: {fileID: 0}
+  childAnimator: {fileID: 0}
+  isAttack: 0
+  missilePortA: {fileID: 600350640}
+  missilePortB: {fileID: 674487992}
+  isLook: 1
 --- !u!1 &1981622958
 GameObject:
   m_ObjectHideFlags: 0
