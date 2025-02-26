@@ -145,7 +145,7 @@ public class Enemy : MonoBehaviour
                 reactVec += Vector3.up;
                 rb.AddForce(reactVec * 5, ForceMode.Impulse);
             }
-            stateMachine.SetState(new DeadState(stateMachine, childAnimator,gameObject,this));
+            stateMachine.SetState(new DeadState(stateMachine, childAnimator,gameObject,GameManager.Instance));
             Destroy(gameObject, 4);
         }
     }
