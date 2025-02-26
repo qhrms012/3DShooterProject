@@ -44,12 +44,12 @@ public class BossThinkState : Istate
 
             case 2:
             case 3:
-                //StartCoroutine(RockShot());
+                stateMachine.SetState(new BossRockShotState(stateMachine,animator,boss));
                 break;
 
             case 4:
 
-                //StartCoroutine(Taunt());
+                stateMachine.SetState(new BossTauntState(stateMachine,animator,boss));
                 break;
         }
     }

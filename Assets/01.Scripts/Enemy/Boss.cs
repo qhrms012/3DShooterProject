@@ -8,8 +8,8 @@ public class Boss : Enemy
     public Transform missilePortA;
     public Transform missilePortB;
 
-    private Vector3 lookVec;
-    private Vector3 tauntVec;
+    public Vector3 lookVec;
+    public Vector3 tauntVec;
     public bool isLook;
 
 
@@ -21,6 +21,7 @@ public class Boss : Enemy
         meshs = GetComponentsInChildren<MeshRenderer>();
         agent = GetComponent<NavMeshAgent>();
         childAnimator = GetComponentInChildren<Animator>();
+        agent.isStopped = true;
 
         stateMachine = new StateMachine();
 

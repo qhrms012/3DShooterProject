@@ -36,9 +36,11 @@ public class BossRockShotState : Istate
         animator.Play("BigShot");
         GameObject bossRock = GameManager.Instance.objectpool.Get(6);
         Vector3 bossRockSpawnPosition = boss.transform.position;
+        bossRock.transform.rotation = boss.transform.rotation;
         bossRock.transform.position = bossRockSpawnPosition;
         yield return new WaitForSeconds(3f);
 
+        boss.isLook = true;
         stateMachine.SetState(new BossThinkState(stateMachine,animator,boss));
     }
 }
