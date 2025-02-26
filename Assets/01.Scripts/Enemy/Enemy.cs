@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent agent;
     public Animator childAnimator;
     public bool isAttack;
+    private bool isDead;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -52,6 +53,8 @@ public class Enemy : MonoBehaviour
     }
     private void TargetTing()
     {
+        if(isDead)
+            return;
         float targetRadius = 0;
         float targetRange = 0;
 
@@ -125,6 +128,8 @@ public class Enemy : MonoBehaviour
                 mesh.material.color = Color.gray;
 
             gameObject.layer = 11;
+            isDead = true;
+            agent.enabled = true;
 
             if (isGrenade)
             {
@@ -140,7 +145,7 @@ public class Enemy : MonoBehaviour
                 reactVec += Vector3.up;
                 rb.AddForce(reactVec * 5, ForceMode.Impulse);
             }
-            
+            stateMachine.SetState(new DeadState(stateMachine, childAnimator,gameObject,this));
             Destroy(gameObject, 4);
         }
     }

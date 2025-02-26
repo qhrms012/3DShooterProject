@@ -18445,6 +18445,8 @@ MonoBehaviour:
   isAttack: 0
   missilePortA: {fileID: 600350640}
   missilePortB: {fileID: 674487992}
+  lookVec: {x: 0, y: 0, z: 0}
+  tauntVec: {x: 0, y: 0, z: 0}
   isLook: 1
 --- !u!1 &1981622958
 GameObject:
@@ -18456,8 +18458,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1981622959}
   - component: {fileID: 1981622960}
+  - component: {fileID: 1981622961}
   m_Layer: 12
-  m_Name: MeleeArea
+  m_Name: BossMeleeArea
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18495,10 +18498,25 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 11, y: 1, z: 10}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &1981622961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981622958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 645c8b7e33ba8a04682782744ab56c24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 25
+  isMelee: 1
+  isRock: 0
 --- !u!1 &2046669040
 GameObject:
   m_ObjectHideFlags: 0

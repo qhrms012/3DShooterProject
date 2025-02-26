@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StateMachine
+public class StateMachine 
 {
     public Istate currentState;
 
