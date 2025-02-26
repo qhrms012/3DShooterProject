@@ -18,8 +18,7 @@ public class BossMissileShot : Istate
 
 
     public void Enter()
-    {
-        animator.Play("Shot");
+    {        
         boss.StartCoroutine(MissileShot());
     }
 
@@ -35,6 +34,7 @@ public class BossMissileShot : Istate
 
     IEnumerator MissileShot()
     {
+        animator.Play("Shot");
         GameObject instantBossMissileA = GameManager.Instance.objectpool.Get(5);
         BossMissile bossMissileA = instantBossMissileA.GetComponent<BossMissile>();
 
@@ -45,6 +45,7 @@ public class BossMissileShot : Istate
 
 
         yield return new WaitForSeconds(0.3f);
+        animator.Play("Shot");
         GameObject instantBossMissileB = GameManager.Instance.objectpool.Get(5);
         BossMissile bossMissileB = instantBossMissileB.GetComponent<BossMissile>();
         Vector3 bulletSpawnPositionB = boss.missilePortB.transform.position;
@@ -53,5 +54,6 @@ public class BossMissileShot : Istate
         bossMissileB.target = boss.target;
 
         yield return new WaitForSeconds(2f);
+        stateMachine.SetState(new BossThinkState(stateMachine, animator, boss));
     }
 }

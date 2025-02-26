@@ -24,9 +24,13 @@ public class Boss : Enemy
 
         stateMachine = new StateMachine();
 
-        StartCoroutine(Think());
+        
     }
 
+    private void Start()
+    {
+        stateMachine.SetState(new BossThinkState(stateMachine,childAnimator,this));
+    }
 
     void Update()
     {
@@ -37,52 +41,5 @@ public class Boss : Enemy
             lookVec = new Vector3(h, 0, v) * 5f;
             transform.LookAt(target.position + lookVec);
         }
-    }
-
-    IEnumerator Think()
-    {
-        yield return new WaitForSeconds(0.1f);
-
-        int ranAction = Random.Range(0, 5);
-        switch (ranAction)
-        {
-            case 0:                
-            case 1:
-                StartCoroutine(MissileShot());
-                break;
-
-            case 2:
-            case 3:
-                StartCoroutine(RockShot());
-                break;
-
-            case 4:
-
-                StartCoroutine(Taunt());
-                break;
-        }
-    }
-
-    IEnumerator MissileShot()
-    {
-        yield return new WaitForSeconds(2.5f);
-        stateMachine.SetState(new BossMissileShot(stateMachine,childAnimator,this));
-
-
-
-        StartCoroutine(Think());
-    }
-
-    IEnumerator RockShot()
-    {
-
-        yield return new WaitForSeconds(3f);
-        StartCoroutine(Think());
-    }
-
-    IEnumerator Taunt()
-    {
-        yield return new WaitForSeconds(3f);
-        StartCoroutine(Think());
     }
 }
