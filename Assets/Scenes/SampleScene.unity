@@ -564,7 +564,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 15800981}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1496936097}
+        m_TargetAssemblyTypeName: Shop, Assembly-CSharp
+        m_MethodName: Exit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &15800981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7810,7 +7822,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 407153797}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1716327960}
+        m_TargetAssemblyTypeName: Shop, Assembly-CSharp
+        m_MethodName: Exit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &407153797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24809,6 +24833,7 @@ GameObject:
   - component: {fileID: 1496936096}
   - component: {fileID: 1496936095}
   - component: {fileID: 1496936094}
+  - component: {fileID: 1496936097}
   m_Layer: 0
   m_Name: Zone
   m_TagString: Shop
@@ -29649,6 +29674,20 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &1496936097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496936092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db9193b1090822a4bb33074796fccd89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiGroup: {fileID: 624627793}
+  childAnimator: {fileID: 1355367272}
 --- !u!1 &1502514958
 GameObject:
   m_ObjectHideFlags: 0
@@ -31121,6 +31160,7 @@ GameObject:
   - component: {fileID: 1716327959}
   - component: {fileID: 1716327958}
   - component: {fileID: 1716327957}
+  - component: {fileID: 1716327960}
   m_Layer: 0
   m_Name: Zone
   m_TagString: Shop
@@ -35961,6 +36001,20 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &1716327960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716327955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db9193b1090822a4bb33074796fccd89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiGroup: {fileID: 890115462}
+  childAnimator: {fileID: 580552536}
 --- !u!1 &1717448712
 GameObject:
   m_ObjectHideFlags: 0
