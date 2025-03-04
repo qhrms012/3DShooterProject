@@ -6771,7 +6771,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 219743851}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1496936097}
+        m_TargetAssemblyTypeName: Shop, Assembly-CSharp
+        m_MethodName: Buy
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &219743851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6895,7 +6907,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 255902540}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1496936097}
+        m_TargetAssemblyTypeName: Shop, Assembly-CSharp
+        m_MethodName: Buy
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &255902540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7411,7 +7435,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 337660883}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1496936097}
+        m_TargetAssemblyTypeName: Shop, Assembly-CSharp
+        m_MethodName: Buy
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &337660883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23118,7 +23154,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1305185459}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1716327960}
+        m_TargetAssemblyTypeName: Shop, Assembly-CSharp
+        m_MethodName: Buy
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1305185459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29688,6 +29736,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiGroup: {fileID: 624627793}
   childAnimator: {fileID: 1355367272}
+  itemObj:
+  - {fileID: 6153242500345094827, guid: 3b3f2a3fb0666e445ba695c1aba3d66e, type: 3}
+  - {fileID: 2587738986595074588, guid: 9c64a02e6b4f03748a08b4cccc18f0c5, type: 3}
+  - {fileID: 319596536980441120, guid: 142c8e077acc67b48858e10e8ae62078, type: 3}
+  itemPrice: e8030000b0040000c4090000
+  itemPos:
+  - {fileID: 174150009}
+  - {fileID: 376608937}
+  - {fileID: 1126980127}
+  talkData:
+  - What sup
+  - get out
+  talkText: {fileID: 1911187813}
 --- !u!1 &1502514958
 GameObject:
   m_ObjectHideFlags: 0
@@ -30244,7 +30305,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1552288238}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1716327960}
+        m_TargetAssemblyTypeName: Shop, Assembly-CSharp
+        m_MethodName: Buy
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1552288238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30968,7 +31041,7 @@ MonoBehaviour:
   jumpPower: 15
   followCamera: {fileID: 963194227}
   ammo: 0
-  coin: 0
+  coin: 4000
   health: 100
   hasGrenades: 0
   grenadeObj: {fileID: 8886129868591152856, guid: 3f824434422137f4a8accd2d979b5abf, type: 3}
@@ -36015,6 +36088,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiGroup: {fileID: 890115462}
   childAnimator: {fileID: 580552536}
+  itemObj:
+  - {fileID: 5095247799304172911, guid: 42d662cd84f61ad4c933916956e2de4a, type: 3}
+  - {fileID: 4600845118856871561, guid: 22244934e25171d4bb2d31c9e8d5408f, type: 3}
+  - {fileID: 9072599738535783280, guid: 526049be8e275424bbcd60afeb59beb1, type: 3}
+  itemPrice: e8030000b0040000c4090000
+  itemPos:
+  - {fileID: 1986540456}
+  - {fileID: 1694065405}
+  - {fileID: 1659528348}
+  talkData:
+  - Hello
+  - You don't have money
+  talkText: {fileID: 2062885846}
 --- !u!1 &1717448712
 GameObject:
   m_ObjectHideFlags: 0
@@ -36444,7 +36530,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1748260417}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1716327960}
+        m_TargetAssemblyTypeName: Shop, Assembly-CSharp
+        m_MethodName: Buy
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1748260417
 MonoBehaviour:
   m_ObjectHideFlags: 0
