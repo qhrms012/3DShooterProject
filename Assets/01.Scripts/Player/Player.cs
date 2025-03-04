@@ -44,6 +44,7 @@ public class Player : MonoBehaviour
     public bool onAttack;
     private bool isBorder;
     private bool isDamage;
+    private bool isShop;
 
     private Animator childAnimator;
     private Rigidbody rb;
@@ -124,6 +125,8 @@ public class Player : MonoBehaviour
     }
     public void OnAttack()
     {
+        if (isShop)
+            return;
         Debug.Log($"현재 장착 무기 :{equipWeapon.type}");
         if (equipWeapon.type == Weapon.Type.Melee)
         {
@@ -204,6 +207,7 @@ public class Player : MonoBehaviour
             else if (nearObject.tag == "Shop")
             {
                 Shop shop = nearObject.GetComponent<Shop>();
+                isShop = true;
                 shop.Enter(this);
 
 
@@ -322,6 +326,7 @@ public class Player : MonoBehaviour
         {
             Shop shop = nearObject.GetComponent<Shop>();
             shop.Exit();
+            isShop = false;
             nearObject = null;
         }
     }
