@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     public int ammo;
     public int coin;
     public int health;
+    public int score;
     public int hasGrenades;
     public GameObject grenadeObj;
     private MeshRenderer[] meshs;

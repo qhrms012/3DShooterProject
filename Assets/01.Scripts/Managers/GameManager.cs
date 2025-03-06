@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -39,6 +40,7 @@ public class GameManager : Singleton<GameManager>
     public TextMeshProUGUI enemyBText;
     public TextMeshProUGUI enemyCText;
 
+    
     public Image bossHealth;
 
 
@@ -47,7 +49,59 @@ public class GameManager : Singleton<GameManager>
     private void Awake()
     {
         Application.targetFrameRate = 60;
-        PlayerPrefs.SetInt("MaxScore", 999999);
+        maxScoreText.text = string.Format("{0:n0}", PlayerPrefs.GetInt("MaxScore"));
+    }
+
+    public void GameStart()
+    {
+        menuCam.SetActive(false);
+        gameCam.SetActive(true);
+
+        menuPanel.SetActive(false);
+        gamePanel.SetActive(true);
+
+        player.gameObject.SetActive(true);
+    }
+
+    private void Update()
+    {
+        if (isBattle)
+        {
+            playTime += Time.deltaTime;
+        }
+    }
+
+    private void LateUpdate()
+    {
+        scoreText.text = string.Format("{0:n0}",player.score);
+        stageText.text = "STAGE " + stage;
+        int hour = (int)(playTime / 3600);
+        int min = (int)((playTime - hour * 3600) / 60);
+        int second = (int)(playTime % 60);
+
+        playTimeText.text = string.Format("{0:n0}", hour) + ":" + string.Format("{0:n0}", min) 
+            + ":" + string.Format("{0:n0}", second);
+
+        playerHealthText.text = player.health + " / " + player.maxHealth;
+        playerCoinText.text = string.Format("{0:n0}", player.coin);
+
+        if (player.equipWeapon == null)
+            playerAmmoText.text = "- / " + player.ammo;
+        else if (player.equipWeapon.type == Weapon.Type.Melee)
+            playerAmmoText.text = "- / " + player.ammo;
+        else
+            playerAmmoText.text = player.equipWeapon.curAmmo + " / " + player.ammo;
+
+        weapon1Img.color = new Color(1, 1, 1, player.hasWeapons[0] ? 1 : 0);
+        weapon2Img.color = new Color(1, 1, 1, player.hasWeapons[1] ? 1 : 0);
+        weapon3Img.color = new Color(1, 1, 1, player.hasWeapons[2] ? 1 : 0);
+        weaponGImg.color = new Color(1, 1, 1, player.hasGrenades > 0 ? 1 : 0);
+
+        enemyAText.text = enemyCntA.ToString();
+        enemyBText.text = enemyCntB.ToString();
+        enemyCText.text = enemyCntC.ToString();
+
+        bossHealth.fillAmount = (float)boss.curHealth / (float)boss.maxHealth;
     }
 
 }

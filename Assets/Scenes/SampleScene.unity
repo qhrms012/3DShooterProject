@@ -5842,7 +5842,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &72227242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13237,7 +13237,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 439344657}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 560454391}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: GameStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &439344657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16204,7 +16216,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 60.000004
+  field of view: 60
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
@@ -16230,8 +16242,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.55771774, y: -0.04900369, z: 0.03301051, w: 0.8279251}
-  m_LocalPosition: {x: -24.29, y: 26.76, z: -6.73}
+  m_LocalRotation: {x: 0.52138436, y: 0.000000007341291, z: -0.0000000044855684, w: 0.85332197}
+  m_LocalPosition: {x: -10.24, y: 21, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24848,7 +24860,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7988094277207216310, guid: 83dab506297948d4d8d34c4fe12431ee, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7988094277207216310, guid: 83dab506297948d4d8d34c4fe12431ee, type: 3}
       propertyPath: m_TagString
@@ -30591,7 +30603,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1534548933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31553,6 +31565,7 @@ MonoBehaviour:
   ammo: 0
   coin: 4000
   health: 100
+  score: 0
   hasGrenades: 0
   grenadeObj: {fileID: 8886129868591152856, guid: 3f824434422137f4a8accd2d979b5abf, type: 3}
   maxAmmo: 999
