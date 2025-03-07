@@ -9,9 +9,12 @@ public class Enemy : MonoBehaviour
     public Type enemyType;
     public int maxHealth;
     public int curHealth;
+    public int score;
+    public GameObject[] coins;
     public Transform target;
     public BoxCollider meleeArea;
     public StateMachine stateMachine;
+
 
     public Rigidbody rb;
     public BoxCollider bc;
@@ -146,6 +149,10 @@ public class Enemy : MonoBehaviour
                 rb.AddForce(reactVec * 5, ForceMode.Impulse);
             }
             stateMachine.SetState(new DeadState(stateMachine, childAnimator,gameObject,GameManager.Instance));
+            Player player = target.GetComponent<Player>();
+            player.score += score;
+            int ranCoin = Random.Range(0, 3);
+            Instantiate(coins[ranCoin], transform.position, Quaternion.identity);
             Destroy(gameObject, 4);
         }
     }

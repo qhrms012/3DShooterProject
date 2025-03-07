@@ -12,6 +12,12 @@ public class GameManager : Singleton<GameManager>
     public GameObject gameCam;
     public Player player;
     public Boss boss;
+    public GameObject itemShop;
+    public GameObject weaponShop;
+    public GameObject startZ;
+
+    public Transform[] enemyZones;
+
     public int stage;
     public float playTime;
     public bool isBattle;
@@ -71,6 +77,29 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public void StageStart()
+    {
+        itemShop.SetActive(false);
+        weaponShop.SetActive(false);
+        startZ.SetActive(false);
+
+        isBattle = true;
+        StartCoroutine(Battle());
+    }
+    public void StageEnd()
+    {
+        player.transform.position = new Vector3(-10, 1, 0);
+        itemShop.SetActive(true);
+        weaponShop.SetActive(true);
+        startZ.SetActive(true);
+        isBattle = false;
+        stage++;
+    }
+    IEnumerator Battle()
+    {
+        yield return new WaitForSeconds(3f);
+        StageEnd();
+    }
     private void LateUpdate()
     {
         scoreText.text = string.Format("{0:n0}",player.score);
