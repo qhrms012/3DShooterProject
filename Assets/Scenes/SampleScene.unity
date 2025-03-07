@@ -13435,16 +13435,22 @@ MonoBehaviour:
   menuCam: {fileID: 72227241}
   gameCam: {fileID: 1534548932}
   player: {fileID: 1679981089}
-  boss: {fileID: 0}
   itemShop: {fileID: 101443419}
   weaponShop: {fileID: 1843912093}
   startZ: {fileID: 564616854}
-  stage: 0
+  enemyZones:
+  - {fileID: 621648808}
+  - {fileID: 1821880875}
+  - {fileID: 1747789303}
+  - {fileID: 1183105529}
+  enemyList: 
+  stage: 1
   playTime: 0
   isBattle: 0
   enemyCntA: 0
   enemyCntB: 0
   enemyCntC: 0
+  enemyCntD: 0
   menuPanel: {fileID: 364634136}
   gamePanel: {fileID: 1549871023}
   maxScoreText: {fileID: 56541684}
@@ -38542,6 +38548,10 @@ MonoBehaviour:
   - {fileID: 1755917601220099213, guid: 8f14a932914b1cf4f925ef2d2ac30784, type: 3}
   - {fileID: 6913595091022656285, guid: add4eacef0384154787eccf294e452dc, type: 3}
   - {fileID: 6216087017419036407, guid: b10300a87d213aa4d88cb1799e670c96, type: 3}
+  - {fileID: 2487498018683373611, guid: 13a43a39c57eb654eafc86e46deeff93, type: 3}
+  - {fileID: 2034231551376930492, guid: 468e4e9ac3734b04e90b4bb7fac57d47, type: 3}
+  - {fileID: 6433213910791127827, guid: 790087dda38304143ba1cf7035d7ba54, type: 3}
+  - {fileID: 1217092677467327595, guid: eaa5b389cdd6e78469e24c52b1bfd922, type: 3}
 --- !u!4 &1399152174
 Transform:
   m_ObjectHideFlags: 0

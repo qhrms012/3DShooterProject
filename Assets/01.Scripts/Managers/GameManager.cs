@@ -11,12 +11,13 @@ public class GameManager : Singleton<GameManager>
     public GameObject menuCam;
     public GameObject gameCam;
     public Player player;
-    public Boss boss;
+    private Boss boss;
     public GameObject itemShop;
     public GameObject weaponShop;
     public GameObject startZ;
 
     public Transform[] enemyZones;
+    public List<int> enemyList;
 
     public int stage;
     public float playTime;
@@ -24,6 +25,7 @@ public class GameManager : Singleton<GameManager>
     public int enemyCntA;
     public int enemyCntB;
     public int enemyCntC;
+    public int enemyCntD;
 
     public GameObject menuPanel;
     public GameObject gamePanel;
@@ -46,7 +48,7 @@ public class GameManager : Singleton<GameManager>
     public TextMeshProUGUI enemyBText;
     public TextMeshProUGUI enemyCText;
 
-    
+
     public Image bossHealth;
 
 
@@ -55,6 +57,8 @@ public class GameManager : Singleton<GameManager>
     private void Awake()
     {
         Application.targetFrameRate = 60;
+        enemyList = new List<int>();
+        boss = GetComponent<Boss>();
         maxScoreText.text = string.Format("{0:n0}", PlayerPrefs.GetInt("MaxScore"));
     }
 
@@ -83,12 +87,17 @@ public class GameManager : Singleton<GameManager>
         weaponShop.SetActive(false);
         startZ.SetActive(false);
 
+        foreach (Transform zone in enemyZones)
+            zone.gameObject.SetActive(true);
+
         isBattle = true;
         StartCoroutine(Battle());
     }
     public void StageEnd()
     {
         player.transform.position = new Vector3(-10, 1, 0);
+        foreach (Transform zone in enemyZones)
+            zone.gameObject.SetActive(false);
         itemShop.SetActive(true);
         weaponShop.SetActive(true);
         startZ.SetActive(true);
@@ -97,18 +106,63 @@ public class GameManager : Singleton<GameManager>
     }
     IEnumerator Battle()
     {
-        yield return new WaitForSeconds(3f);
+        if(stage % 5 == 0)
+        {
+            GameObject enemySpawn = objectpool.Get(10);
+            enemySpawn.transform.position = enemyZones[0].position;
+            enemySpawn.transform.rotation = enemyZones[0].rotation;
+            Enemy enemy = enemySpawn.GetComponent<Enemy>();
+            enemy.target = player.transform;
+            boss = enemySpawn.GetComponent<Boss>();
+        }
+        for (int i = 0; i < stage; i++)
+        {
+            int ran = Random.Range(7, 9);
+            enemyList.Add(ran);
+
+            switch (ran)
+            {
+                case 7:
+                    enemyCntA++;
+                    break;
+                case 8:
+                    enemyCntB++;
+                    break;
+                case 9:
+                    enemyCntC++;
+                    break;
+            }
+        }
+
+        while (enemyList.Count > 0)
+        {
+            int ranZone = Random.Range(0, 4);
+
+            GameObject enemySpawn = objectpool.Get(enemyList[0]);
+            enemySpawn.transform.position = enemyZones[ranZone].position + Vector3.up * 0.5f;
+            enemySpawn.transform.rotation = enemyZones[ranZone].rotation;
+
+            Enemy enemy = enemySpawn.GetComponent<Enemy>();
+            enemy.target = player.transform;
+            enemyList.RemoveAt(0);
+            yield return new WaitForSeconds(4f);
+        }
+        while (enemyCntA + enemyCntB + enemyCntC + enemyCntD > 0)
+        {
+            yield return null;
+        }
+        yield return new WaitForSeconds(4f);
         StageEnd();
     }
     private void LateUpdate()
     {
-        scoreText.text = string.Format("{0:n0}",player.score);
+        scoreText.text = string.Format("{0:n0}", player.score);
         stageText.text = "STAGE " + stage;
         int hour = (int)(playTime / 3600);
         int min = (int)((playTime - hour * 3600) / 60);
         int second = (int)(playTime % 60);
 
-        playTimeText.text = string.Format("{0:n0}", hour) + ":" + string.Format("{0:n0}", min) 
+        playTimeText.text = string.Format("{0:n0}", hour) + ":" + string.Format("{0:n0}", min)
             + ":" + string.Format("{0:n0}", second);
 
         playerHealthText.text = player.health + " / " + player.maxHealth;
@@ -130,7 +184,8 @@ public class GameManager : Singleton<GameManager>
         enemyBText.text = enemyCntB.ToString();
         enemyCText.text = enemyCntC.ToString();
 
-        bossHealth.fillAmount = (float)boss.curHealth / (float)boss.maxHealth;
+        if (boss != null)
+            bossHealth.fillAmount = (float)boss.curHealth / (float)boss.maxHealth;
     }
 
 }

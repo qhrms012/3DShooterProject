@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    public enum Type { A, B, C ,D};
+    public enum Type { A, B, C, D };
     public Type enemyType;
     public int maxHealth;
     public int curHealth;
@@ -32,8 +32,8 @@ public class Enemy : MonoBehaviour
         childAnimator = GetComponentInChildren<Animator>();
 
         stateMachine = new StateMachine();
-        
-        
+
+
     }
     private void Start()
     {
@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour
     {
         stateMachine.Update(target.position);
     }
-    
+
     private void FixedUpdate()
     {
         FreezeRotation();
@@ -52,11 +52,11 @@ public class Enemy : MonoBehaviour
     private void FreezeRotation()
     {
         rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;      
+        rb.angularVelocity = Vector3.zero;
     }
     private void TargetTing()
     {
-        if(isDead)
+        if (isDead)
             return;
         float targetRadius = 0;
         float targetRange = 0;
@@ -76,19 +76,19 @@ public class Enemy : MonoBehaviour
                 targetRange = 25f;
                 break;
         }
-        RaycastHit[] rayHits = 
-            Physics.SphereCastAll(transform.position,targetRadius,transform.forward,targetRange,
+        RaycastHit[] rayHits =
+            Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange,
                                                             LayerMask.GetMask("Player"));
 
-        if(rayHits.Length > 0 && !isAttack)
+        if (rayHits.Length > 0 && !isAttack)
         {
             stateMachine.SetState(new EnemyAttackState(stateMachine, childAnimator, meleeArea, this, rb));
         }
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Melee")
+        if (other.tag == "Melee")
         {
             Weapon weapon = other.GetComponent<Weapon>();
             curHealth -= weapon.damage;
@@ -96,7 +96,7 @@ public class Enemy : MonoBehaviour
 
             StartCoroutine(OnDamage(reactVec, false));
         }
-        else if(other.tag == "Bullet")
+        else if (other.tag == "Bullet")
         {
             Bullet bullet = other.GetComponent<Bullet>();
             curHealth -= bullet.damage;
@@ -110,17 +110,17 @@ public class Enemy : MonoBehaviour
     {
         curHealth -= 100;
         Vector3 reactVec = transform.position - explosionPos;
-        StartCoroutine (OnDamage(reactVec, true));
+        StartCoroutine(OnDamage(reactVec, true));
     }
 
     IEnumerator OnDamage(Vector3 reactVec, bool isGrenade)
     {
-        foreach(MeshRenderer mesh in meshs) 
+        foreach (MeshRenderer mesh in meshs)
             mesh.material.color = Color.red;
-        
+
         yield return new WaitForSeconds(0.1f);
 
-        if(curHealth > 0)
+        if (curHealth > 0)
         {
             foreach (MeshRenderer mesh in meshs)
                 mesh.material.color = Color.white;
@@ -148,11 +148,26 @@ public class Enemy : MonoBehaviour
                 reactVec += Vector3.up;
                 rb.AddForce(reactVec * 5, ForceMode.Impulse);
             }
-            stateMachine.SetState(new DeadState(stateMachine, childAnimator,gameObject,GameManager.Instance));
+            stateMachine.SetState(new DeadState(stateMachine, childAnimator, gameObject, GameManager.Instance));
             Player player = target.GetComponent<Player>();
             player.score += score;
             int ranCoin = Random.Range(0, 3);
             Instantiate(coins[ranCoin], transform.position, Quaternion.identity);
+            switch (enemyType)
+            {
+                case Type.A:
+                    GameManager.Instance.enemyCntA--;
+                    break;
+                case Type.B:
+                    GameManager.Instance.enemyCntB--;
+                    break;
+                case Type.C:
+                    GameManager.Instance.enemyCntC--;
+                    break;
+                case Type.D:
+                    GameManager.Instance.enemyCntD--;
+                    break;
+            }
             Destroy(gameObject, 4);
         }
     }
