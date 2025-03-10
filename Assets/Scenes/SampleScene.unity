@@ -13453,6 +13453,7 @@ MonoBehaviour:
   enemyCntD: 0
   menuPanel: {fileID: 364634136}
   gamePanel: {fileID: 1549871023}
+  bossObject: {fileID: 804449393}
   maxScoreText: {fileID: 56541684}
   scoreText: {fileID: 1776438799}
   stageText: {fileID: 2156374}
@@ -24557,7 +24558,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &804449394
 RectTransform:
   m_ObjectHideFlags: 0

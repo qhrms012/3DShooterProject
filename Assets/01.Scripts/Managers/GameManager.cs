@@ -29,6 +29,7 @@ public class GameManager : Singleton<GameManager>
 
     public GameObject menuPanel;
     public GameObject gamePanel;
+    public GameObject bossObject;
 
     public TextMeshProUGUI maxScoreText;
     public TextMeshProUGUI scoreText;
@@ -72,6 +73,10 @@ public class GameManager : Singleton<GameManager>
 
         player.gameObject.SetActive(true);
     }
+    public void GameOver()
+    {
+        
+    }
 
     private void Update()
     {
@@ -103,6 +108,7 @@ public class GameManager : Singleton<GameManager>
         startZ.SetActive(true);
         isBattle = false;
         stage++;
+        StopCoroutine(Battle());
     }
     IEnumerator Battle()
     {
@@ -185,7 +191,16 @@ public class GameManager : Singleton<GameManager>
         enemyCText.text = enemyCntC.ToString();
 
         if (boss != null)
+        {
+            bossObject.SetActive(true);
             bossHealth.fillAmount = (float)boss.curHealth / (float)boss.maxHealth;
+        }
+        else
+        {
+            bossObject.SetActive(false);
+        }
+        
+        
     }
 
 }

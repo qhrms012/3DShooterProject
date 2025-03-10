@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     public Animator childAnimator;
     public bool isAttack;
     private bool isDead;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
