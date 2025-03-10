@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -29,11 +30,14 @@ public class GameManager : Singleton<GameManager>
 
     public GameObject menuPanel;
     public GameObject gamePanel;
+    public GameObject overPanel;
     public GameObject bossObject;
 
     public TextMeshProUGUI maxScoreText;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI stageText;
+    public TextMeshProUGUI curScoreText;
+    public TextMeshProUGUI bestScore;
 
     public TextMeshProUGUI playTimeText;
     public TextMeshProUGUI playerHealthText;
@@ -75,7 +79,20 @@ public class GameManager : Singleton<GameManager>
     }
     public void GameOver()
     {
-        
+        gamePanel.SetActive(false);
+        overPanel.SetActive(true);
+        curScoreText.text = scoreText.text;
+
+        int maxScore = PlayerPrefs.GetInt("MaxScore");
+        if(player.score > maxScore)
+        {
+            bestScore.gameObject.SetActive(true);
+            PlayerPrefs.SetInt("MaxScore", player.score);
+        }
+    }
+    public void Restart()
+    {
+        SceneManager.LoadScene(0);
     }
 
     private void Update()

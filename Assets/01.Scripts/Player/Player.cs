@@ -57,6 +57,7 @@ public class Player : MonoBehaviour
 
     public float fireDelay;
     public bool isFireReady;
+    public bool isDead;
 
 
 
@@ -297,9 +298,12 @@ public class Player : MonoBehaviour
         {
             mesh.material.color = Color.red;
         }
+
         if(isBossAtk)
             rb.AddForce(transform.forward * -25, ForceMode.Impulse);
         yield return new WaitForSeconds(1f);
+
+        isDamage = false;
 
         foreach (MeshRenderer mesh in meshs)
         {
@@ -307,7 +311,13 @@ public class Player : MonoBehaviour
         }
         if(isBossAtk)
             rb.velocity = Vector3.zero;
-        isDamage = false;
+        
+        if(health <= 0 && !isDead)
+        {
+            isDead = true;
+            stateMachine.SetState(new DeadState(stateMachine, childAnimator,gameObject,this));
+            GameManager.Instance.GameOver();
+        }
 
     }
     private void OnTriggerStay(Collider other)
