@@ -81,7 +81,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shot
+  m_Name: AutoShot
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -315,7 +315,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Burst
+  m_Name: BurstShot
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -419,7 +419,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shoot_SingleShot_AR
+  m_Name: SingleShot
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
