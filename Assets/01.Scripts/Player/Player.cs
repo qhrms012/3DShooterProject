@@ -58,11 +58,12 @@ public class Player : MonoBehaviour
     public float fireDelay;
     public bool isFireReady;
     public bool isDead;
-
+    private FireModeSwitcher fireModeSwitcher;
 
 
     private void Awake()
     {
+        fireModeSwitcher = new FireModeSwitcher();
         childAnimator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
         stateMachine = new StateMachine();
@@ -99,6 +100,10 @@ public class Player : MonoBehaviour
             onRun = false;
             stateMachine.SetState(new WalkState(stateMachine, childAnimator, this));
         }
+    }
+    public void OnFireMode()
+    {
+        fireModeSwitcher.SwitchFireMode();
     }
     public void OnTurn()
     {
@@ -143,6 +148,19 @@ public class Player : MonoBehaviour
             stateMachine.SetState(new SubMachineGunShotState(stateMachine, childAnimator, this, equipWeapon));
         }
         Debug.Log($"새로운 상태 : {stateMachine.currentState?.GetType().Name}"); // 상태 변경 후 확인
+
+        if (fireModeSwitcher.currentMode == FireMode.Single)
+        {
+
+        }
+        else if (fireModeSwitcher.currentMode == FireMode.Auto)
+        {
+
+        }
+        else if (fireModeSwitcher.currentMode == FireMode.Burst)
+        {
+
+        }
     }
     public void OnReload()
     {
