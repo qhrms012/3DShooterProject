@@ -159,7 +159,7 @@ public class Player : MonoBehaviour
         }
         else if (fireModeSwitcher.currentMode == FireMode.Burst)
         {
-
+            stateMachine.SetState(new BurstFireState(stateMachine, childAnimator, this, equipWeapon));
         }
     }
     public void OnReload()

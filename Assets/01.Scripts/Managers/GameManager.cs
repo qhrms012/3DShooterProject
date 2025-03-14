@@ -65,6 +65,9 @@ public class GameManager : Singleton<GameManager>
         enemyList = new List<int>();
         boss = GetComponent<Boss>();
         maxScoreText.text = string.Format("{0:n0}", PlayerPrefs.GetInt("MaxScore"));
+        weapon1Img.color = new Color(0, 0, 0);
+        weapon2Img.color = new Color(0, 0, 0);
+        weapon3Img.color = new Color(0, 0, 0);
     }
 
     public void GameStart()
