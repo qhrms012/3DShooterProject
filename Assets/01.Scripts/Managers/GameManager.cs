@@ -198,9 +198,9 @@ public class GameManager : Singleton<GameManager>
         else
             playerAmmoText.text = player.equipWeapon.curAmmo + " / " + player.ammo;
 
-        weapon1Img.color = new Color(1, 1, 1, player.hasWeapons[0] ? 1 : 0);
-        weapon2Img.color = new Color(1, 1, 1, player.hasWeapons[1] ? 1 : 0);
-        weapon3Img.color = new Color(1, 1, 1, player.hasWeapons[2] ? 1 : 0);
+        //weapon1Img.color = new Color(1, 1, 1, player.hasWeapons[0] ? 1 : 0);
+        //weapon2Img.color = new Color(1, 1, 1, player.hasWeapons[1] ? 1 : 0);
+        //weapon3Img.color = new Color(1, 1, 1, player.hasWeapons[2] ? 1 : 0);
         weaponGImg.color = new Color(1, 1, 1, player.hasGrenades > 0 ? 1 : 0);
 
         enemyAText.text = enemyCntA.ToString();
@@ -218,6 +218,27 @@ public class GameManager : Singleton<GameManager>
         }
         
         
+    }
+    public void UpdateWeaponUI()
+    {
+        // 모든 무기 이미지 초기화 (꺼줌)
+        weapon1Img.color = new Color(0, 0, 0);
+        weapon2Img.color = new Color(0, 0, 0);
+        weapon3Img.color = new Color(0, 0, 0);
+
+        // 현재 선택된 무기만 활성화
+        if (player.fireModeSwitcher.currentMode == FireMode.Single)
+        {
+            weapon1Img.color = new Color(1, 1, 1);
+        }
+        else if (player.fireModeSwitcher.currentMode == FireMode.Burst)
+        {
+            weapon2Img.color = new Color(1, 1, 1);
+        }
+        else if (player.fireModeSwitcher.currentMode == FireMode.Auto)
+        {
+            weapon3Img.color = new Color(1, 1, 1);
+        }
     }
 
 }

@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
     public float fireDelay;
     public bool isFireReady;
     public bool isDead;
-    private FireModeSwitcher fireModeSwitcher;
+    public FireModeSwitcher fireModeSwitcher;
 
 
     private void Awake()
