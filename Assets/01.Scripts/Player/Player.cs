@@ -155,7 +155,7 @@ public class Player : MonoBehaviour
         }
         else if (fireModeSwitcher.currentMode == FireMode.Auto)
         {
-
+            stateMachine.SetState(new AutoFireState(stateMachine,childAnimator,this, equipWeapon));
         }
         else if (fireModeSwitcher.currentMode == FireMode.Burst)
         {
