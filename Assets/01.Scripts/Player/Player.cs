@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -46,6 +47,7 @@ public class Player : MonoBehaviour
     private bool isBorder;
     private bool isDamage;
     private bool isShop;
+    public bool onAuto;
 
     private Animator childAnimator;
     private Rigidbody rb;
@@ -60,6 +62,8 @@ public class Player : MonoBehaviour
     public bool isDead;
     public FireModeSwitcher fireModeSwitcher;
 
+    private float fireRate = 0.2f; // 기본 발사 속도 (0.2초에 한 번)
+    private float nextFireTime = 0f; // 다음 발사가 가능한 시간
 
     private void Awake()
     {
@@ -77,9 +81,16 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
+        OnPush();
         OnTurn();
         stateMachine.Update(position);
         UpdateMovementState();
+
+        // 자동 발사 모드일 경우 발사 상태 유지
+        if (onAuto)
+        {
+            HandleAutoFire();
+        }
     }
     public void OnMove(InputValue value)
     {
@@ -149,19 +160,58 @@ public class Player : MonoBehaviour
         //}
         Debug.Log($"새로운 상태 : {stateMachine.currentState?.GetType().Name}"); // 상태 변경 후 확인
 
+        //while (onAuto)
+        //{
+        //    if (fireModeSwitcher.currentMode == FireMode.Single)
+        //    {
+        //        stateMachine.SetState(new SingleFireState(stateMachine, childAnimator, this, equipWeapon));
+        //    }
+        //    else if (fireModeSwitcher.currentMode == FireMode.Auto)
+        //    {
+        //        stateMachine.SetState(new AutoFireState(stateMachine, childAnimator, this, equipWeapon));
+        //    }
+        //    else if (fireModeSwitcher.currentMode == FireMode.Burst)
+        //    {
+        //        stateMachine.SetState(new BurstFireState(stateMachine, childAnimator, this, equipWeapon));
+        //    }
+        //}
+        
+    }
+    // 자동 발사 모드 관리 메서드 추가
+    private void HandleAutoFire()
+    {
+        if (Time.time < nextFireTime) return; // 발사 가능 시간이 아닐 경우 무시
+
+        nextFireTime = Time.time + fireRate; // 다음 발사 가능 시간 갱신
+
         if (fireModeSwitcher.currentMode == FireMode.Single)
         {
+            fireRate = 0.5f; // 단발 모드는 천천히 발사
             stateMachine.SetState(new SingleFireState(stateMachine, childAnimator, this, equipWeapon));
         }
         else if (fireModeSwitcher.currentMode == FireMode.Auto)
         {
-            stateMachine.SetState(new AutoFireState(stateMachine,childAnimator,this, equipWeapon));
+            fireRate = 0.1f; // 자동 모드는 빠르게 발사
+            stateMachine.SetState(new AutoFireState(stateMachine, childAnimator, this, equipWeapon));
         }
         else if (fireModeSwitcher.currentMode == FireMode.Burst)
         {
-            stateMachine.SetState(new BurstFireState(stateMachine, childAnimator, this, equipWeapon));
+            fireRate = 0.3f; // 점사 모드는 중간 속도
+            StartCoroutine(BurstFireCoroutine()); // 점사는 연속적으로 몇 발 쏴야 하므로 코루틴 사용
         }
     }
+    private IEnumerator BurstFireCoroutine()
+    {
+        int burstCount = 3; // 3점사
+        for (int i = 0; i < burstCount; i++)
+        {
+            if (!onAuto) break; // 도중에 버튼을 떼면 중지
+            stateMachine.SetState(new BurstFireState(stateMachine, childAnimator, this, equipWeapon));
+            yield return new WaitForSeconds(0.1f); // 점사 간격
+        }
+    }
+
+
     public void OnReload()
     {
         if (equipWeapon == null)
@@ -211,6 +261,18 @@ public class Player : MonoBehaviour
         FreezeRotation();
         StopToWall();
 
+    }
+    public void OnPush()
+    {
+        if (Input.GetMouseButton(0)) 
+        {
+            onAuto = true;
+        }
+        else
+        {
+            onAuto= false;
+        }
+            
     }
     public void OnInteration()
     {
