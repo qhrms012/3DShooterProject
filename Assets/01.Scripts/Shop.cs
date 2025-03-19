@@ -28,7 +28,7 @@ public class Shop : MonoBehaviour
 
     public void Exit()
     {
-        childAnimator.Play("Hello");
+        //childAnimator.Play("Hello");
         uiGroup.anchoredPosition = Vector3.down * 1000;
 
     }

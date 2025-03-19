@@ -132,13 +132,10 @@ public class GameManager : Singleton<GameManager>
     }
     IEnumerator Battle()
     {
-        if(stage % 5 == 0)
+        if (stage % 5 == 0)
         {
             GameObject enemySpawn = objectpool.Get(10);
-            enemySpawn.transform.position = enemyZones[0].position;
-            enemySpawn.transform.rotation = enemyZones[0].rotation;
-            Enemy enemy = enemySpawn.GetComponent<Enemy>();
-            enemy.target = player.transform;
+            ResetEnemy(enemySpawn, enemyZones[0].position);
             boss = enemySpawn.GetComponent<Boss>();
         }
         for (int i = 0; i < stage; i++)
@@ -163,23 +160,38 @@ public class GameManager : Singleton<GameManager>
         while (enemyList.Count > 0)
         {
             int ranZone = Random.Range(0, 4);
-
             GameObject enemySpawn = objectpool.Get(enemyList[0]);
-            enemySpawn.transform.position = enemyZones[ranZone].position + Vector3.up * 0.5f;
-            enemySpawn.transform.rotation = enemyZones[ranZone].rotation;
-
-            Enemy enemy = enemySpawn.GetComponent<Enemy>();
-            enemy.target = player.transform;
+            ResetEnemy(enemySpawn, enemyZones[ranZone].position + Vector3.up * 0.5f);
             enemyList.RemoveAt(0);
             yield return new WaitForSeconds(4f);
         }
+
         while (enemyCntA + enemyCntB + enemyCntC + enemyCntD > 0)
         {
             yield return null;
         }
+
         yield return new WaitForSeconds(4f);
         StageEnd();
     }
+
+    void ResetEnemy(GameObject enemySpawn, Vector3 position)
+    {
+        Enemy enemy = enemySpawn.GetComponent<Enemy>();
+
+        enemySpawn.transform.position = position;
+        enemySpawn.transform.rotation = Quaternion.identity;
+
+        enemy.isDead = false;
+        enemy.agent.enabled = true;
+        enemy.agent.ResetPath();  // NavMeshAgent∞° √ ±‚»≠µ 
+        enemy.agent.SetDestination(player.transform.position);  // ≈∏∞Ÿ º≥¡§
+        enemy.curHealth = enemy.maxHealth;
+        enemy.target = player.transform;
+        enemy.gameObject.layer = 10;
+        enemy.stateMachine.SetState(new ChaseState(enemy.stateMachine,enemy.childAnimator, enemy.agent,player.transform));
+    }
+
     private void LateUpdate()
     {
         scoreText.text = string.Format("{0:n0}", player.score);

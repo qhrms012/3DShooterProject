@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
     public NavMeshAgent agent;
     public Animator childAnimator;
     public bool isAttack;
-    private bool isDead;
+    public bool isDead;
 
     private void Awake()
     {
@@ -169,7 +169,7 @@ public class Enemy : MonoBehaviour
                     GameManager.Instance.enemyCntD--;
                     break;
             }
-            Destroy(gameObject, 4);
+            gameObject.SetActive(false);
         }
     }
 
