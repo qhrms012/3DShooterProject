@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
 
     public Rigidbody rb;
     public BoxCollider bc;
-    public MeshRenderer[] meshs;
+    public SkinnedMeshRenderer[] meshs;
     public NavMeshAgent agent;
     public Animator childAnimator;
     public bool isAttack;
@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
-        meshs = GetComponentsInChildren<MeshRenderer>();
+        meshs = GetComponentsInChildren<SkinnedMeshRenderer>();
         agent = GetComponent<NavMeshAgent>();
         childAnimator = GetComponentInChildren<Animator>();
 
@@ -116,19 +116,19 @@ public class Enemy : MonoBehaviour
 
     IEnumerator OnDamage(Vector3 reactVec, bool isGrenade)
     {
-        foreach (MeshRenderer mesh in meshs)
+        foreach (SkinnedMeshRenderer mesh in meshs)
             mesh.material.color = Color.red;
 
         yield return new WaitForSeconds(0.1f);
 
         if (curHealth > 0)
         {
-            foreach (MeshRenderer mesh in meshs)
+            foreach (SkinnedMeshRenderer mesh in meshs)
                 mesh.material.color = Color.white;
         }
         else
         {
-            foreach (MeshRenderer mesh in meshs)
+            foreach (SkinnedMeshRenderer mesh in meshs)
                 mesh.material.color = Color.gray;
 
             gameObject.layer = 11;

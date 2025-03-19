@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     public int score;
     public int hasGrenades;
     public GameObject grenadeObj;
-    private MeshRenderer[] meshs;
+    private SkinnedMeshRenderer[] meshs;
 
     public int maxAmmo;
     public int maxCoin;
@@ -71,7 +71,7 @@ public class Player : MonoBehaviour
         childAnimator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
         stateMachine = new StateMachine();
-        meshs = GetComponentsInChildren<MeshRenderer>();
+        meshs = GetComponentsInChildren<SkinnedMeshRenderer>();
 
     }
     private void Start()
@@ -159,22 +159,6 @@ public class Player : MonoBehaviour
         //    stateMachine.SetState(new SubMachineGunShotState(stateMachine, childAnimator, this, equipWeapon));
         //}
         Debug.Log($"새로운 상태 : {stateMachine.currentState?.GetType().Name}"); // 상태 변경 후 확인
-
-        //while (onAuto)
-        //{
-        //    if (fireModeSwitcher.currentMode == FireMode.Single)
-        //    {
-        //        stateMachine.SetState(new SingleFireState(stateMachine, childAnimator, this, equipWeapon));
-        //    }
-        //    else if (fireModeSwitcher.currentMode == FireMode.Auto)
-        //    {
-        //        stateMachine.SetState(new AutoFireState(stateMachine, childAnimator, this, equipWeapon));
-        //    }
-        //    else if (fireModeSwitcher.currentMode == FireMode.Burst)
-        //    {
-        //        stateMachine.SetState(new BurstFireState(stateMachine, childAnimator, this, equipWeapon));
-        //    }
-        //}
         
     }
     // 자동 발사 모드 관리 메서드 추가
@@ -196,7 +180,7 @@ public class Player : MonoBehaviour
         }
         else if (fireModeSwitcher.currentMode == FireMode.Burst)
         {
-            fireRate = 0.3f; // 점사 모드는 중간 속도
+            fireRate = 0.5f; // 점사 모드는 중간 속도
             StartCoroutine(BurstFireCoroutine()); // 점사는 연속적으로 몇 발 쏴야 하므로 코루틴 사용
         }
     }
@@ -374,7 +358,7 @@ public class Player : MonoBehaviour
     IEnumerator OnDamage(bool isBossAtk)
     {
         isDamage = true;
-        foreach(MeshRenderer mesh in meshs)
+        foreach(SkinnedMeshRenderer mesh in meshs)
         {
             mesh.material.color = Color.red;
         }
@@ -385,7 +369,7 @@ public class Player : MonoBehaviour
 
         isDamage = false;
 
-        foreach (MeshRenderer mesh in meshs)
+        foreach (SkinnedMeshRenderer mesh in meshs)
         {
             mesh.material.color = Color.white;
         }

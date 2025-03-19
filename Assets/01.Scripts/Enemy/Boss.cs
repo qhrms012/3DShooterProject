@@ -18,7 +18,7 @@ public class Boss : Enemy
     {
         rb = GetComponent<Rigidbody>();
         bc = GetComponent<BoxCollider>();
-        meshs = GetComponentsInChildren<MeshRenderer>();
+        meshs = GetComponentsInChildren<SkinnedMeshRenderer>();
         agent = GetComponent<NavMeshAgent>();
         childAnimator = GetComponentInChildren<Animator>();
         agent.isStopped = true;

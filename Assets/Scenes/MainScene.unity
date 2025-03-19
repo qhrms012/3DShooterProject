@@ -32721,8 +32721,9 @@ MonoBehaviour:
   hasWeapons: 000000
   onJump: 0
   onAttack: 0
+  onAuto: 0
   position: {x: 0, y: 0, z: 0}
-  equipWeapon: {fileID: 0}
+  equipWeapon: {fileID: 1552524930}
   weaponIndex: 0
   fireDelay: 0
   isFireReady: 0
@@ -57511,7 +57512,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7673487251499248694, guid: c98043d57e0190845b790d7b92990bee, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7673487251499248694, guid: c98043d57e0190845b790d7b92990bee, type: 3}
       propertyPath: m_TagString
