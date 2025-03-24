@@ -56,12 +56,14 @@ public class GameManager : Singleton<GameManager>
 
     public Image bossHealth;
 
-
+    public SaveLoadManager saveLoadManager;
 
     public ObjectPool objectpool;
     private void Awake()
     {
         Application.targetFrameRate = 60;
+        saveLoadManager = new SaveLoadManager();
+        saveLoadManager.LoadData();
         enemyList = new List<int>();
         boss = GetComponent<Boss>();
         maxScoreText.text = string.Format("{0:n0}", PlayerPrefs.GetInt("MaxScore"));
