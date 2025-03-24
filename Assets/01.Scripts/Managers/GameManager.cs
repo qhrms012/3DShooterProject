@@ -62,11 +62,13 @@ public class GameManager : Singleton<GameManager>
     private void Awake()
     {
         Application.targetFrameRate = 60;
-        saveLoadManager = new SaveLoadManager();
         saveLoadManager.LoadData();
+        PlayerData playerData = saveLoadManager.LoadData();
+
         enemyList = new List<int>();
         boss = GetComponent<Boss>();
-        maxScoreText.text = string.Format("{0:n0}", PlayerPrefs.GetInt("MaxScore"));
+
+        maxScoreText.text = string.Format("{0:n0}", playerData.maxScore);
         weapon1Img.color = new Color(1, 1, 1);
         weapon2Img.color = new Color(0, 0, 0);
         weapon3Img.color = new Color(0, 0, 0);
@@ -88,11 +90,13 @@ public class GameManager : Singleton<GameManager>
         overPanel.SetActive(true);
         curScoreText.text = scoreText.text;
 
-        int maxScore = PlayerPrefs.GetInt("MaxScore");
+        PlayerData playerData = saveLoadManager.LoadData();
+
+        int maxScore = playerData.maxScore;
+
         if(player.score > maxScore)
         {
-            bestScore.gameObject.SetActive(true);
-            PlayerPrefs.SetInt("MaxScore", player.score);
+            saveLoadManager.SaveData();
         }
     }
     public void Restart()

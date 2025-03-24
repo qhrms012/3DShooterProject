@@ -10,7 +10,8 @@ public class SaveLoadManager : MonoBehaviour
 
     private void Awake()
     {
-        filePath = Path.Combine(Application.persistentDataPath, "playerData.json");
+        filePath = Path.Combine(Application.persistentDataPath, "playerScoreData.json");
+        Debug.Log("파일 경로: " + filePath);
     }
 
     public void SaveData()
@@ -26,18 +27,19 @@ public class SaveLoadManager : MonoBehaviour
         Debug.Log("저장 완료" +  filePath);
     }
 
-    public void LoadData()
+    public PlayerData LoadData()
     {
         if (File.Exists(filePath))
         {
             string json = File.ReadAllText(filePath);
             PlayerData data = JsonUtility.FromJson<PlayerData>(json);
+            return data; 
         }
-        else 
+        else
         {
             Debug.Log("저장된 파일이 없음");
+            return new PlayerData();
         }
-        
     }
 }
 
