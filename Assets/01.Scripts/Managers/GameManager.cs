@@ -86,6 +86,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void GameOver()
     {
+        AudioManager.Instance.PlaySfx(AudioManager.SFX.GameOver);
         gamePanel.SetActive(false);
         overPanel.SetActive(true);
         curScoreText.text = scoreText.text;

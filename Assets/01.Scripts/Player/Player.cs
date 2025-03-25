@@ -167,7 +167,7 @@ public class Player : MonoBehaviour
         if (Time.time < nextFireTime) return; // 발사 가능 시간이 아닐 경우 무시
 
         nextFireTime = Time.time + fireRate; // 다음 발사 가능 시간 갱신
-
+        AudioManager.Instance.PlaySfx(AudioManager.SFX.Shot);
         if (fireModeSwitcher.currentMode == FireMode.Single)
         {
             fireRate = 0.5f; // 단발 모드는 천천히 발사
@@ -206,6 +206,7 @@ public class Player : MonoBehaviour
             return;
         if (stateMachine.currentState is RunState && stateMachine.currentState is JumpState)
             return;
+        AudioManager.Instance.PlaySfx(AudioManager.SFX.Reload);
         stateMachine.SetState(new ReloadState(stateMachine, childAnimator, this, equipWeapon));
     }
     public void OnGrenade()
@@ -358,6 +359,7 @@ public class Player : MonoBehaviour
     IEnumerator OnDamage(bool isBossAtk)
     {
         isDamage = true;
+        AudioManager.Instance.PlaySfx(AudioManager.SFX.Hit);
         foreach(SkinnedMeshRenderer mesh in meshs)
         {
             mesh.material.color = Color.red;

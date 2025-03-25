@@ -10,7 +10,15 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField] private Slider masterSlider;
     [SerializeField] private Slider bgmSlider;
     [SerializeField] private Slider sfxSlider;
-
+    [SerializeField] private AudioSource sfxAudioSource;
+    [SerializeField] private AudioClip[] sfxSource;
+    public enum SFX
+    {
+        Shot,
+        Reload,
+        Hit,
+        GameOver
+    }
 
     private void Awake()
     {
@@ -18,11 +26,6 @@ public class AudioManager : Singleton<AudioManager>
         bgmSlider.onValueChanged.AddListener(SetBgmVolume);
         sfxSlider.onValueChanged.AddListener(SetSfxVolume);
 
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     public void SetMasterVolume(float volume)
@@ -37,11 +40,20 @@ public class AudioManager : Singleton<AudioManager>
     {
         audioMixer.SetFloat("SFX", Mathf.Log10(volume) * 20);
     }
+
+    // 효과음 재생 함수 추가
+    public void PlaySfx(SFX sfx)
+    {
+        int index = (int)sfx; // Enum의 순서를 배열 인덱스로 변환
+
+        if (index >= 0 && index < sfxSource.Length)
+        {
+            sfxAudioSource.PlayOneShot(sfxSource[index]);
+        }
+        else
+        {
+            Debug.LogWarning("SFX 인덱스 범위 초과: " + sfx);
+        }
+    }
 }
-public enum SFX
-{
-    Shot,
-    Reload,
-    Hit,
-    GameOver
-}
+
